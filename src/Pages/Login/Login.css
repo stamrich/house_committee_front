@@ -1,0 +1,52 @@
+.Login {
+    height: 100vh;
+    width: 100vw;
+    background-color: #f5f5f5e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Login form {
+    height: 40vh;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 35px;
+    box-shadow: 0 25px 35px #0000002e;
+}
+
+input {
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #ffb886;
+}
+
+input:focus {
+    outline: none;
+}
+
+.submitButton {
+    width: 100px;
+    padding: 10px;
+    /* border: none; TODO: changed it to the next line*/
+    border: 1px solid #ff7b1d;
+    /* border-radius: 10px; TODO: changed it to 35*/
+    border-radius: 35px;
+    cursor: pointer;
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    /* background-color: #ffb886; TODO: changed it to only on hover
+    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%); */
+}
+
+.submitButton:hover {
+    background-color: #ffb886;
+    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
+    color: #fff;
+    transform: scale(1.1);
+    transition-duration: 150ms;
+}

@@ -1,0 +1,123 @@
+.PopUp {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(94, 115, 113, 0.532);
+    z-index: 240;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.PopUp-body {
+    overflow: auto;
+    width: 80vw;
+    height: 80vh;
+    padding: 20px 40px;
+    border-radius: 35px;
+    background-color: #fff;
+    box-shadow: 0 25px 35px #0000002e;
+    overflow: hidden; /*                  NEED TO CHANGE              */
+}
+.PopUp-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.PopUp-header-title {
+    font-size: larger;
+}
+.PopUp-tab-selectors {
+    display: flex;
+    justify-content: center;
+}
+.PopUp-tab {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 35px;
+    border: 1px solid #ffb886;
+}
+.PopUp-tab:hover {
+    background-color: #ffb886;
+}
+.PopUp-tab.selected {
+    background-color: #ffb886;
+    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
+    color: #fff;
+}
+.PopUp-close:hover {
+    transform: scale(1.1);
+    transition-duration: 100ms;
+}
+.PopUp-content {
+    /* padding-top: 30px; */
+    height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    align-items: safe;
+    overflow: hidden; /*                  NEED TO CHANGE              */
+}
+.PopUp-info-tab {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: last baseline;
+}
+.PopUp-info-tab-inputs {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: baseline;
+}
+.PopUp-info-tab div {
+    margin: 5px;
+}
+.PopUp-info-tab-buttons {
+    display: flex;
+}
+.PopUp-info-tab-button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 35px;
+    border: 1px solid #ffb886;
+}
+.PopUp-info-tab-button:hover {
+    background-color: #ffb886;
+}
+.PopUp-transaction-container {
+    display: flex;
+    height: 100%;
+}
+.PopUp-transaction-options {
+    height: 70vh;
+    width: 20vw;
+    border-bottom-left-radius: 35px;
+    border-top-left-radius: 35px;
+    background-color: #fff;
+    box-shadow: 0 25px 35px #0000002e;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    margin-left: 20px;
+}
+.PopUp-transaction-option:first-child {
+    margin-top: 3vh;
+}
+.PopUp-transaction-option {
+    /* height: 300px;
+    width: 200px; */
+    margin-left: 10px;
+    padding: 8px 14px 8px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.PopUp-transaction-option:last-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff7b1d;
+    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
+}
