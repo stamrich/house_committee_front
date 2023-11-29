@@ -1,5 +1,5 @@
-import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useContext } from "react";
 
 // Importing components
 // import MyAgTable from "../MyAgTable/MyAgTable.js";
@@ -8,11 +8,18 @@ import { useState } from "react";
 import "./PopUpWindow.css";
 
 // import Icon's
-import xSymbol from "../../Icons/x-symbol.svg";
+import xSymbol from "../../../Icons/x-symbol.svg";
 
-// function PopUpWindow({ fromWhere, tableColumns, rowInfo, buildings = false }) {
+//Context
+import { PageContext } from "../../../Context/PageContext.js";
+
 function PopUpWindow() {
-    const test2 = [
+    const { inputFields } = useContext(PageContext);
+    const { pageName, id } = useParams();
+    const navigator = useNavigate();
+    const [shownTab, setShownTab] = useState("info");
+    const currentFields = inputFields[pageName];
+    const [inputValues, setInputValues] = useState([
         {
             "קוד בניין": 12160,
             רחוב: "בית יוסף",
@@ -181,63 +188,7 @@ function PopUpWindow() {
             הערות: "",
             "אמצעי תשלום": "אשראי",
         },
-    ];
-    const { id } = useParams();
-    const navigator = useNavigate();
-    const location = useLocation();
-    const [shownTab, setShownTab] = useState("info");
-    const [inputValues, setInputValues] = useState(test2);
-
-    const testData = [
-        {
-            id: "1234",
-            date: "2014-12-10 13:20:00",
-            type: "payment",
-            amount: "1231.34",
-        },
-        {
-            id: "2314",
-            date: "2014-12-10 01:23:00",
-            type: "payment",
-            amount: "34.34",
-        },
-        {
-            id: "8392",
-            date: "2014-12-10 03:23:00",
-            type: "bill",
-            amount: "59.34",
-        },
-        {
-            id: "4921",
-            date: "2014-12-10 08:23:00",
-            type: "payment",
-            amount: "1245",
-        },
-        {
-            id: "3019",
-            date: "2014-12-10 21:23:00",
-            type: "bill",
-            amount: "321",
-        },
-    ];
-
-    const testColumns = [
-        { field: "id", headerName: "not id", filter: true },
-        { field: "date", headerName: "not date", filter: true },
-        { field: "type", headerName: "not type", filter: true },
-        {
-            field: "amount",
-            filter: true,
-            cellStyle: (params) => {
-                if (params.data.type === "bill") {
-                    //mark bills cells as red
-                    return { backgroundColor: "rgb(246, 178, 176)" };
-                }
-                console.log(params);
-                return { backgroundColor: "rgb(189, 246, 176)" };
-            },
-        },
-    ];
+    ]);
 
     const testColumns2 = [
         { field: "קוד בניין", filter: true },
@@ -252,6 +203,14 @@ function PopUpWindow() {
         { field: "אמצעי תשלום", filter: true },
     ];
 
+    const translateWindowName = {
+        Buildings: "בניין",
+        Apartments: "דירה",
+        People: "איש קשר",
+        Transactions: "תשלום",
+        Todos: "משימה",
+    };
+
     const handleInputChange = (event) => {
         console.log(event);
         const name = event.target.name;
@@ -262,7 +221,7 @@ function PopUpWindow() {
     function changeTab(event) {
         console.log(event.target.id);
         setShownTab(event.target.id);
-    }
+    } // eslint-disable-next-line
     function handleDoubleClick() {
         console.log("handleDoubleClick");
     }
@@ -270,19 +229,19 @@ function PopUpWindow() {
     function handleCloseButton() {
         navigator(-1);
     }
-
+    console.log(inputFields);
     const PopUpTabs = {
         info: (
             <div className="PopUp-info-tab">
                 <div className="PopUp-info-tab-inputs">
-                    {testColumns2.map((column) => (
-                        <div key={`inputs-${column.field}`}>
-                            {column.field}:{" "}
+                    {Object.keys(currentFields).map((inputKey) => (
+                        <div key={`inputs-${inputKey}`}>
+                            {currentFields[inputKey]}:{" "}
                             <input
                                 type="text"
+                                name={inputKey}
+                                value={inputValues[inputKey]}
                                 onChange={handleInputChange}
-                                name={column.field}
-                                value={inputValues[column.field]}
                             />
                         </div>
                     ))}
@@ -323,14 +282,13 @@ function PopUpWindow() {
             </div>
         ),
     };
-    {
-        console.log(location);
-    }
     return (
         <div className="PopUp">
             <div className="PopUp-body">
                 <div className="PopUp-header">
-                    <div className="PopUp-header-title">: {id}</div>
+                    <div className="PopUp-header-title">
+                        קוד {translateWindowName[pageName]} : {id}
+                    </div>
                     <div className="PopUp-tab-selectors">
                         {Object.keys(PopUpTabs).map((tabName) => {
                             // if (tabName === "apartments" && !buildings) {

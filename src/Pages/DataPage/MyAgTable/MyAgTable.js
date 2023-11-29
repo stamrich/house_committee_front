@@ -1,6 +1,5 @@
 import React, { useRef, useMemo } from "react";
 import { AgGridReact } from "ag-grid-react"; // the AG Grid React Component
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 //Styles from Ag
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
@@ -8,11 +7,8 @@ import "ag-grid-community/styles/ag-theme-balham.css"; // Optional theme CSS
 //My custom styles
 import "./MyAgTable.css";
 
-function MyAgTable({ allData, columnNames, size, pageName }) {
-    // const { pageName } = useParams();
-    const navigator = useNavigate();
+function MyAgTable({ allData, columnNames, size, handleDoubleClick }) {
     const gridRef = useRef(); // Optional - for accessing Grid's API
-    const location = useLocation();
 
     // DefaultColDef sets props common to all Columns
     const defaultColDef = useMemo(
@@ -23,14 +19,6 @@ function MyAgTable({ allData, columnNames, size, pageName }) {
         }),
         []
     );
-
-    //TODO: moved it back to dataPage
-    const handleDoubleClick = (row) => {
-        console.log("double clicked", pageName);
-        console.log(`${location.pathname}/${row.data.id}`);
-        // navigator(`${location.pathname}/${row.data.id}`);
-        navigator(`${row.data.id}`);
-    };
 
     const gridOptions = {
         // Add event handlers - Added a double click event to get a popup

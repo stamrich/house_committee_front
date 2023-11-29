@@ -1,35 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-    Outlet,
-    Route,
-    useLocation,
-    useNavigate,
-    Routes,
-} from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 // Import Components
-import NewInputBox from "../../Components/NewInputBox/NewInputBox.js";
-import MyAgTable from "../../Components/MyAgTable/MyAgTable.js";
+import NewInputBox from "./NewInputBox/NewInputBox.js";
+import MyAgTable from "./MyAgTable/MyAgTable.js";
 
 //Import Styles
 import "./DataPage.css";
 
 //Import Context
 import { PageContext } from "../../Context/PageContext";
-import PopUpWindow from "../../Components/PopUpWindow/PopUpWindow.js";
 
 function DataPage() {
-    let location = useLocation();
-    const { state } = useLocation();
-    let pageName = location.pathname.split("/")[1];
+    const location = useLocation();
+    const { pageName } = useParams();
     const navigator = useNavigate();
     const hebrewNames = useContext(PageContext);
+    const [selectedId, setSelectedId] = useState(false);
     const [rowData, setRowData] = useState();
     const [columnData, setColumnData] = useState();
     const [newDataEntered, setNewDataEntered] = useState(false);
-    const [currentPage, setCurrentPage] = useState(pageName);
-
     const inputFields = hebrewNames.inputFields[pageName];
 
     useEffect(() => {
@@ -52,15 +43,18 @@ function DataPage() {
             }
         };
         fetchAllData();
-        console.log(pageName);
-        setCurrentPage(pageName);
-    }, [pageName, newDataEntered]);
+        setSelectedId(false);
+        console.log(pageName); // eslint-disable-next-line
+    }, [location, newDataEntered]);
+
+    useEffect(() => {
+        if (selectedId) {
+            navigator(`/${pageName}/${selectedId}`);
+        } // eslint-disable-next-line
+    }, [selectedId]);
 
     const handleDoubleClick = (row) => {
-        console.log("double clicked");
-        console.log(`./${row.data.id}`);
-        navigator(`./${row.data.id}`, { state: { from: currentPage } });
-        // navigator();
+        setSelectedId(row.data.id);
     };
 
     const saveNewInput = async (values) => {
@@ -75,51 +69,17 @@ function DataPage() {
         }
     };
 
-    //Just a mess for testing TODO: should be deleted
-    const testColumns = [
-        { field: "id", headerName: "not id", filter: true },
-        { field: "date", headerName: "not date", filter: true },
-    ];
-    const testData = [
-        {
-            id: "1234",
-            date: "2014-12-10 13:20:00",
-            type: "payment",
-            amount: "1231.34",
-        },
-        {
-            id: "2314",
-            date: "2014-12-10 01:23:00",
-            type: "payment",
-            amount: "34.34",
-        },
-    ];
-
     return (
-        <Routes>
-            <Route
-                path="/*"
-                element={
-                    <div className="DataPage">
-                        {console.log()}
-                        {console.log()}
-                        <NewInputBox
-                            inputNames={inputFields}
-                            handleSave={saveNewInput}
-                        />
-                        <MyAgTable
-                            allData={rowData}
-                            columnNames={columnData}
-                            size={{ width: "100%", height: "75vh" }}
-                            pageName={currentPage}
-                            // handleDoubleClick={handleDoubleClick}
-                        />
-                        <Outlet />
-                    </div>
-                }
+        <div className="DataPage">
+            <NewInputBox inputNames={inputFields} handleSave={saveNewInput} />
+            <MyAgTable
+                allData={rowData}
+                columnNames={columnData}
+                size={{ width: "100%", height: "75vh" }}
+                handleDoubleClick={handleDoubleClick}
             />
-            <Route path="/:id" element={<PopUpWindow />} />
-        </Routes>
+            <Outlet />
+        </div>
     );
 }
 

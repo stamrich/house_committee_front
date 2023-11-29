@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // import Icon's
-import chevronUp from "../../Icons/chevron-up.svg";
-import chevronDown from "../../Icons/chevron-down.svg";
+import chevronUp from "../../../Icons/chevron-up.svg";
+import chevronDown from "../../../Icons/chevron-down.svg";
 
 //Import Styles
 import "./NewInputBox.css";
 
 function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     // const { pageName } = useParams();
-    const location = useLocation();
-    const pageName = location.pathname.split("/")[1];
+    const { pageName } = useParams();
     const inputFields = inputNames;
     const [inputBoxOpen, setInputBoxOpen] = useState(false);
     const [inputValues, setInputValues] = useState(
@@ -21,12 +20,13 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     useEffect(() => {
         setInputBoxOpen(false);
         resetInputFields();
-    }, []);
+        // eslint-disable-next-line
+    }, [pageName]);
 
     const translateOpenNew = {
         Buildings: "בניין חדש",
         Apartments: "דירה חדשה",
-        People: "איש חדש",
+        People: "איש קשר חדש",
         Transactions: "תשלום חדש",
         Todos: "משימה חדשה",
     };
