@@ -11,6 +11,7 @@ import "./DataPage.css";
 
 //Import Context
 import { PageContext } from "../../Context/PageContext";
+import { useAuth } from "../../hooks/auth/auth.js";
 
 function DataPage() {
     const location = useLocation();
@@ -21,25 +22,42 @@ function DataPage() {
     const [rowData, setRowData] = useState();
     const [columnData, setColumnData] = useState();
     const [newDataEntered, setNewDataEntered] = useState(false);
-    const inputFields = hebrewNames.inputFields[pageName];
+    const inputFields = hebrewNames.pageInfo[pageName].inputFields;
+    const { cookies } = useAuth();
+
+    // useEffect(() => {TODO: trying handle 404
+    // const possiblePages = Object.keys(hebrewNames.pageNames);
+    //     console.log(possiblePages);
+    //     console.log(!possiblePages.includes(pageName));
+    //     if (!possiblePages.includes(pageName)) {
+    //         navigator("/Dashboard");
+    //     }
+    // }, []);
+
+    useEffect(() => {
+        setColumnData();
+        setRowData();
+    }, [pageName]);
 
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axios.get(`/api/${pageName}/`);
+                const res = await axios.get(`/api/${pageName}/`, {
+                    headers: { authorization: cookies.token },
+                });
                 const columns = Object.keys(res.data[0]).map((key) => {
                     return {
                         field: key,
-                        headerName: inputFields[key],
+                        headerName: inputFields[key]
+                            ? inputFields[key].name
+                            : inputFields[key],
                         filter: true,
                     };
                 });
                 setColumnData(columns);
                 setRowData(res.data);
-            } catch (err) {
-                console.log(err);
-                setColumnData();
-                setRowData();
+            } catch (error) {
+                console.log(error);
             }
         };
         fetchAllData();
@@ -61,7 +79,13 @@ function DataPage() {
         console.log("all the values");
         console.log(values);
         try {
-            const res = await axios.post(`/api/${pageName}/new`, { values });
+            const res = await axios.post(
+                `/api/${pageName}/new`,
+                { values },
+                {
+                    headers: { authorization: cookies.token },
+                }
+            );
             console.log(res);
             setNewDataEntered((old) => !old);
         } catch (error) {
@@ -75,7 +99,7 @@ function DataPage() {
             <MyAgTable
                 allData={rowData}
                 columnNames={columnData}
-                size={{ width: "100%", height: "75vh" }}
+                size={{ width: "100%", height: "60vh" }}
                 handleDoubleClick={handleDoubleClick}
             />
             <Outlet />

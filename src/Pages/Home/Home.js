@@ -5,8 +5,8 @@ import Settings from "../Settings/Settings";
 import DataPage from "../DataPage/DataPage";
 
 //Components
-import Header from "../../Components/Header/Header";
-import SideBar from "../../Components/Sidebar/SideBar";
+import Header from "./Header/Header";
+import SideBar from "./Sidebar/SideBar";
 import PageContextProvider from "../../Context/PageContext";
 import PopUpWindow from "../DataPage/PopUpWindow/PopUpWindow";
 
@@ -29,7 +29,29 @@ function Home() {
             path: ":pageName/*",
             // key: "Buildings",
             element: <DataPage />,
-            children: [{ path: ":id", element: <PopUpWindow /> }],
+            children: [
+                {
+                    path: ":id/*",
+                    element: <PopUpWindow />,
+                    // children: [
+                    //     {
+                    //         index: true,
+                    //         path: "InputTab",
+                    //         element: <InputTab />,
+                    //     },
+                    //     {
+                    //         index: false,
+                    //         path: "TransactionsTab",
+                    //         element: <TransactionsTab />,
+                    //     },
+                    //     {
+                    //         index: false,
+                    //         path: "ApartmentsTab",
+                    //         element: <ApartmentsTab />,
+                    //     },
+                    // ],
+                },
+            ],
         },
     ]);
 

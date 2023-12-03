@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../../hooks/auth/auth.js";
+import { useAuth } from "../../../hooks/auth/auth.js";
 
 //Style
 import "./Header.css";
 
 //Context
-import { PageContext } from "../../Context/PageContext.js";
+import { PageContext } from "../../../Context/PageContext.js";
 
 function Header() {
     const { logout } = useAuth();

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import "./SideBar.css";
 
 //Context
-import { PageContext } from "../../Context/PageContext.js";
+import { PageContext } from "../../../Context/PageContext.js";
 
 function SideBar() {
     const hebrewNames = useContext(PageContext);

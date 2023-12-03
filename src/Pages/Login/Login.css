@@ -50,3 +50,8 @@ input:focus {
     transform: scale(1.1);
     transition-duration: 150ms;
 }
+
+.Login .response-message {
+    color: rgb(187, 91, 91);
+    font-size: medium;
+}

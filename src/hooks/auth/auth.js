@@ -24,6 +24,10 @@ export const UserProvider = ({ children }) => {
             navigate("/");
         } catch (error) {
             console.log(error);
+            if (error.response.status === 400) {
+                return "שם משתמש או הסיסמה שגויים";
+            }
+            return "משהו השתבש, תנסה שוב מאוחר יותר";
         }
     };
 

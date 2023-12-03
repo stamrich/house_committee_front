@@ -76,9 +76,9 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
                     <div className="new-input-box-params">
                         {Object.keys(inputFields).map((inputName) => (
                             <div key={inputName}>
-                                {inputFields[inputName]}:{" "}
+                                {inputFields[inputName].name}:{" "}
                                 <input
-                                    type="text"
+                                    type={inputFields[inputName].type}
                                     name={inputName}
                                     value={inputValues[inputName]}
                                     onChange={handleInputChange}

@@ -6,6 +6,7 @@ import "./Login.css";
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [response, setResponse] = useState("");
     const { login } = useAuth();
 
     // //not relevant for here but still useful
@@ -45,7 +46,8 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(username, password);
-        login({ username, password });
+        const res = await login({ username, password });
+        setResponse(res);
     };
 
     return (
@@ -62,6 +64,7 @@ function Login() {
                     placeholder="סיסמה"
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <div className="response-message">{response}</div>
                 <button type="submit" className="submitButton">
                     כניסה
                 </button>
