@@ -1,13 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 //Context
 import { PageContext } from "../../../../Context/PageContext.js";
 import { useAuth } from "../../../../hooks/auth/auth.js";
 
 function InputTab() {
-    const { cookies } = useAuth();
+    const { axiosApi } = useAuth();
     const { pageInfo } = useContext(PageContext);
     const { pageName, id, tabName } = useParams();
     const inputFields = pageInfo[pageName].inputFields;
@@ -20,9 +19,7 @@ function InputTab() {
     useEffect(() => {
         const fetchSingleData = async () => {
             try {
-                const res = await axios.get(`/api/${pageName}/${id}`, {
-                    headers: { authorization: cookies.token },
-                });
+                const res = await axiosApi.get(`/${pageName}/${id}`);
                 // this to filter out all the nulls, if not done it raises an error
                 const existingData = Object.fromEntries(
                     Object.keys(res.data[0]).map((x) => [
@@ -59,15 +56,9 @@ function InputTab() {
         console.log(oldInputValues === inputValues);
         if (oldInputValues !== inputValues) {
             try {
-                const res = await axios.put(
-                    `/api/${pageName}/${id}`,
-                    {
-                        inputValues,
-                    },
-                    {
-                        headers: { authorization: cookies.token },
-                    }
-                );
+                const res = await axiosApi.put(`/${pageName}/${id}`, {
+                    inputValues,
+                });
                 console.log(res);
                 if (res.request.status === 200) {
                     setResponseMessage("השינויים נשמרו בהצלחה");

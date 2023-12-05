@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 
 // Import Components
 import NewInputBox from "./NewInputBox/NewInputBox.js";
@@ -23,7 +22,7 @@ function DataPage() {
     const [columnData, setColumnData] = useState();
     const [newDataEntered, setNewDataEntered] = useState(false);
     const inputFields = hebrewNames.pageInfo[pageName].inputFields;
-    const { cookies } = useAuth();
+    const { axiosApi } = useAuth();
 
     // useEffect(() => {TODO: trying handle 404
     // const possiblePages = Object.keys(hebrewNames.pageNames);
@@ -42,9 +41,7 @@ function DataPage() {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axios.get(`/api/${pageName}/`, {
-                    headers: { authorization: cookies.token },
-                });
+                const res = await axiosApi.get(`/${pageName}/`);
                 const columns = Object.keys(res.data[0]).map((key) => {
                     return {
                         field: key,
@@ -52,6 +49,14 @@ function DataPage() {
                             ? inputFields[key].name
                             : inputFields[key],
                         filter: true,
+                        cellStyle: (params) => {
+                            if (params.value < 0) {
+                                return {
+                                    color: "red",
+                                };
+                            }
+                            return null;
+                        },
                     };
                 });
                 setColumnData(columns);
@@ -79,13 +84,7 @@ function DataPage() {
         console.log("all the values");
         console.log(values);
         try {
-            const res = await axios.post(
-                `/api/${pageName}/new`,
-                { values },
-                {
-                    headers: { authorization: cookies.token },
-                }
-            );
+            const res = await axiosApi.post(`/${pageName}/new`, { values });
             console.log(res);
             setNewDataEntered((old) => !old);
         } catch (error) {

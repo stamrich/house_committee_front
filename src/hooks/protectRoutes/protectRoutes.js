@@ -4,5 +4,9 @@ import { useAuth } from "../auth/auth.js";
 export const ProtectRoutes = () => {
     const { cookies } = useAuth();
 
-    return cookies.token ? <Outlet /> : <Navigate to="/login" exact />;
+    return cookies.accessToken || cookies.refreshToken ? (
+        <Outlet />
+    ) : (
+        <Navigate to="/login" exact />
+    );
 };

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 // Import Components
 import MyAgTable from "../../MyAgTable/MyAgTable.js";
@@ -10,7 +9,7 @@ import { PageContext } from "../../../../Context/PageContext";
 import { useAuth } from "../../../../hooks/auth/auth.js";
 
 function ApartmentsTab() {
-    const { cookies } = useAuth();
+    const { axiosApi } = useAuth();
     const [rowData, setRowData] = useState();
     const [columnData, setColumnData] = useState();
     const navigator = useNavigate();
@@ -21,12 +20,7 @@ function ApartmentsTab() {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axios.get(
-                    `/api/apartments/bybuilding/${id}`,
-                    {
-                        headers: { authorization: cookies.token },
-                    }
-                );
+                const res = await axiosApi.get(`/apartments/byBuilding/${id}`);
                 console.log(res);
                 const columns = Object.keys(res.data[0]).map((key) => {
                     return {
@@ -35,6 +29,14 @@ function ApartmentsTab() {
                             ? inputFields[key].name
                             : inputFields[key],
                         filter: true,
+                        cellStyle: (params) => {
+                            if (params.value < 0) {
+                                return {
+                                    color: "red",
+                                };
+                            }
+                            return null;
+                        },
                     };
                 });
                 setColumnData(columns);

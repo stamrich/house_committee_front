@@ -49,7 +49,11 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
 
     function handleSaveButton() {
         //only if some info is inputted will it save :TODO: add validation here
-        if (inputValues["zipcode"] || inputValues["משפחה"]) {
+        if (
+            inputValues["zipcode"] ||
+            inputValues["משפחה"] ||
+            inputValues["amount"]
+        ) {
             handleSave(inputValues);
             resetInputFields();
         }

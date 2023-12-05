@@ -10,16 +10,42 @@ export const UserProvider = ({ children }) => {
     const navigate = useNavigate();
     const [cookies, setCookies, removeCookie] = useCookies();
 
+    const axiosApi = axios.create({
+        baseURL: "/api/",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: cookies.refreshToken,
+        },
+    });
+
+    axiosApi.interceptors.response.use(
+        function (response) {
+            return response;
+        },
+        function (error) {
+            let res = error.response;
+            if (res.status === 401) {
+                logout();
+            }
+            console.error(
+                "Looks like there was a problem. Status Code: " + res.status
+            );
+            return Promise.reject(error);
+        }
+    );
+
     const login = async ({ username, password }) => {
         try {
-            const res = await axios.post("/api/login", {
+            const res = await axiosApi.post("/login", {
                 username: username,
                 password: password,
             });
             console.log("res:");
             console.log(res);
-            setCookies("token", res.data.accessToken); // your token
-            setCookies("name", res.data.username); // optional data
+            setCookies("accessToken", res.data.accessToken); // your token
+            setCookies("refreshToken", res.data.accessToken); // your token
+            setCookies("name", res.data.fullName);
 
             navigate("/");
         } catch (error) {
@@ -41,6 +67,7 @@ export const UserProvider = ({ children }) => {
             cookies,
             login,
             logout,
+            axiosApi,
         }),
         // eslint-disable-next-line
         [cookies]

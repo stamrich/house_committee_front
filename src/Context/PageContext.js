@@ -68,6 +68,7 @@ function PageContextProvider({ children }) {
                     },
                     partner_email: { name: "אמייל שוטף", type: "text" },
                     partner_remarks: { name: "הערות שוטף", type: "text" },
+                    balance: { name: "עובר ושב", type: "number" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
