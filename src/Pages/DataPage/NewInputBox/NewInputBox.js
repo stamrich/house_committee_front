@@ -48,6 +48,7 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     };
 
     function handleSaveButton() {
+        console.log(inputValues);
         //only if some info is inputted will it save :TODO: add validation here
         if (
             inputValues["zipcode"] ||
@@ -56,6 +57,59 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
         ) {
             handleSave(inputValues);
             resetInputFields();
+        }
+    }
+
+    function inputTypes(inputName) {
+        switch (inputFields[inputName].type) {
+            case "text":
+            case "number":
+            case "tel":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}:{" "}
+                        <input
+                            type={inputFields[inputName].type}
+                            name={inputName}
+                            value={inputValues[inputName]}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                );
+            case "textArea":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}:{" "}
+                        <textarea
+                            name={inputName}
+                            value={inputValues[inputName]}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                );
+            case "select":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}:{" "}
+                        <select
+                            name={inputName}
+                            value={inputValues[inputName]}
+                            onChange={handleInputChange}>
+                            <option hidden label=" "></option>
+                            {inputFields[inputName].options.map((option) => {
+                                return (
+                                    <option value={option} key={option}>
+                                        {option}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                );
+            case "None":
+                return "";
+            default:
+                break;
         }
     }
 
@@ -78,17 +132,9 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
             {inputBoxOpen && (
                 <>
                     <div className="new-input-box-params">
-                        {Object.keys(inputFields).map((inputName) => (
-                            <div key={inputName}>
-                                {inputFields[inputName].name}:{" "}
-                                <input
-                                    type={inputFields[inputName].type}
-                                    name={inputName}
-                                    value={inputValues[inputName]}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                        ))}
+                        {Object.keys(inputFields).map((inputName) =>
+                            inputTypes(inputName)
+                        )}
                     </div>
                     <div className="new-input-box-buttons-container">
                         <div className="new-input-box-buttons">

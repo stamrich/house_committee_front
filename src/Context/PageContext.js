@@ -16,6 +16,7 @@ function PageContextProvider({ children }) {
         pageInfo: {
             Apartments: {
                 inputFields: {
+                    address: { name: "כתובת", type: "None" },
                     buildings_id: { name: "קוד בניין", type: "text" },
                     apartments_number: { name: "מספר דירה", type: "text" },
                     entrance: { name: "כניסה", type: "text" },
@@ -23,7 +24,7 @@ function PageContextProvider({ children }) {
                     size_meter: { name: "גודל במטרים", type: "text" },
                     size_bedrooms: { name: "חדרים", type: "text" },
                     balance: { name: "עובר ושב", type: "number" },
-                    remarks: { name: "הערות", type: "text" },
+                    remarks: { name: "הערות", type: "textArea" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
@@ -39,7 +40,7 @@ function PageContextProvider({ children }) {
                     representative_phone: { name: "טלפון נציג", type: "tel" },
                     representative_email: { name: "אמייל נציג", type: "text" },
                     balance: { name: "עובר ושב", type: "number" },
-                    remarks: { name: "הערות", type: "text" },
+                    remarks: { name: "הערות", type: "textArea" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
@@ -49,6 +50,8 @@ function PageContextProvider({ children }) {
             },
             People: {
                 inputFields: {
+                    address: { name: "כתובת", type: "None" },
+                    apartments_number: { name: "מספר דירה", type: "None" },
                     id_number: { name: "ת.ז.", type: "text" },
                     first_name: { name: "שם פרטי", type: "text" },
                     last_name: { name: "שם משפחה", type: "text" },
@@ -56,7 +59,7 @@ function PageContextProvider({ children }) {
                     phone: { name: "טלפון", type: "tel" },
                     second_phone: { name: "טלפון שני", type: "tel" },
                     email: { name: "אמייל", type: "text" },
-                    remarks: { name: "הערות", type: "text" },
+                    remarks: { name: "הערות", type: "textArea" },
                     partner_id_number: { name: "ת.ז. שוטף", type: "text" },
                     partner_first_name: { name: "שם פרטי שוטף", type: "text" },
                     partner_last_name: { name: "שם משפחה שוטף", type: "text" },
@@ -80,7 +83,7 @@ function PageContextProvider({ children }) {
                     connection_id: { name: "קוד שייכות", type: "text" },
                     connection_id_type: { name: "סוגה שייכות", type: "text" },
                     body: { name: "גוף", type: "text" },
-                    remarks: { name: "הערות", type: "text" },
+                    remarks: { name: "הערות", type: "textArea" },
                     todo_status: { name: "מצוב", type: "text" },
                 },
                 Tabs: {
@@ -91,7 +94,11 @@ function PageContextProvider({ children }) {
             Transactions: {
                 inputFields: {
                     connection_id: { name: "קוד שייכות", type: "text" },
-                    connection_id_type: { name: "סוגה שייכות", type: "text" },
+                    connection_id_type: {
+                        name: "סוגה שייכות",
+                        type: "select",
+                        options: ["בניין", "דירה", "איש"],
+                    },
                     transaction_reason: { name: "סיבה", type: "text" },
                     type_transaction: {
                         name: "סוגה עמצאי התשלום",
@@ -99,13 +106,14 @@ function PageContextProvider({ children }) {
                     },
                     bill_type: { name: "סוגה התשלום", type: "text" },
                     amount: { name: "סכום", type: "number" },
-                    remarks: { name: "הערות", type: "text" },
+                    remarks: { name: "הערות", type: "textArea" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
                     TransactionsTab: "תשלומים",
                 },
             },
+            Payments: {},
         },
     };
 

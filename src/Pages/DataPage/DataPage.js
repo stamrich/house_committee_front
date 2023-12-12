@@ -41,7 +41,7 @@ function DataPage() {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axiosApi.get(`/${pageName}/`);
+                const res = await axiosApi.get(`/${pageName}/info`);
                 const columns = Object.keys(res.data[0]).map((key) => {
                     return {
                         field: key,
