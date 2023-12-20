@@ -7,11 +7,11 @@ function TransactionsTab() {
     }
 
     return (
-        <div className="PopUp-transaction-container">
-            <div className="PopUp-transaction-options">
-                <div className="PopUp-transaction-option">הוסף חדש</div>
-                <div className="PopUp-transaction-option">מחק</div>
-                <div className="PopUp-transaction-option">להוצא דוח</div>
+        <div className="PopUpWindow-transaction-container">
+            <div className="PopUpWindow-transaction-options">
+                <div className="PopUpWindow-transaction-option">הוסף חדש</div>
+                <div className="PopUpWindow-transaction-option">מחק</div>
+                <div className="PopUpWindow-transaction-option">להוצא דוח</div>
             </div>
             {/* <MyAgTable
                 allData={testData}

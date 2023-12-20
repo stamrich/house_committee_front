@@ -16,30 +16,36 @@ function PageContextProvider({ children }) {
         pageInfo: {
             Apartments: {
                 inputFields: {
+                    id: { name: "קוד", type: "None" },
                     address: { name: "כתובת", type: "None" },
+                    balance: { name: "עובר ושב", type: "number" },
+                    tenant: { name: "דייר", type: "None" },
+                    boss: { name: "בעל הבית", type: "None" },
                     buildings_id: { name: "קוד בניין", type: "text" },
                     apartments_number: { name: "מספר דירה", type: "text" },
                     entrance: { name: "כניסה", type: "text" },
                     zipcode: { name: "מיקוד", type: "text" },
                     size_meter: { name: "גודל במטרים", type: "text" },
                     size_bedrooms: { name: "חדרים", type: "text" },
-                    balance: { name: "עובר ושב", type: "number" },
                     remarks: { name: "הערות", type: "textArea" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
                     TransactionsTab: "תשלומים",
+                    ConnectionsTab: "חיבורים",
                 },
             },
             Buildings: {
                 inputFields: {
+                    id: { name: "קוד", type: "None" },
                     street: { name: "רחוב", type: "text" },
                     street_number: { name: "בספר בית", type: "number" },
                     city: { name: "עיר", type: "text" },
+                    balance: { name: "עובר ושב", type: "number" },
                     representative: { name: "נציג", type: "text" },
                     representative_phone: { name: "טלפון נציג", type: "tel" },
                     representative_email: { name: "אמייל נציג", type: "text" },
-                    balance: { name: "עובר ושב", type: "number" },
+                    apartment_amount: { name: "סך הכול דירות", type: "None" },
                     remarks: { name: "הערות", type: "textArea" },
                 },
                 Tabs: {
@@ -50,15 +56,18 @@ function PageContextProvider({ children }) {
             },
             People: {
                 inputFields: {
-                    address: { name: "כתובת", type: "None" },
-                    apartments_number: { name: "מספר דירה", type: "None" },
-                    id_number: { name: "ת.ז.", type: "text" },
+                    id: { name: "קוד", type: "None" },
                     first_name: { name: "שם פרטי", type: "text" },
                     last_name: { name: "שם משפחה", type: "text" },
                     nickname: { name: "כינוי", type: "text" },
+                    balance: { name: "עובר ושב", type: "number" },
+                    city: { name: "עיר", type: "None" },
+                    address: { name: "כתובת", type: "None" },
+                    type_connection: { name: "קשר לדירה", type: "None" },
                     phone: { name: "טלפון", type: "tel" },
                     second_phone: { name: "טלפון שני", type: "tel" },
                     email: { name: "אמייל", type: "text" },
+                    id_number: { name: "ת.ז.", type: "text" },
                     remarks: { name: "הערות", type: "textArea" },
                     partner_id_number: { name: "ת.ז. שוטף", type: "text" },
                     partner_first_name: { name: "שם פרטי שוטף", type: "text" },
@@ -71,7 +80,6 @@ function PageContextProvider({ children }) {
                     },
                     partner_email: { name: "אמייל שוטף", type: "text" },
                     partner_remarks: { name: "הערות שוטף", type: "text" },
-                    balance: { name: "עובר ושב", type: "number" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
@@ -111,6 +119,19 @@ function PageContextProvider({ children }) {
                 Tabs: {
                     InputTab: "פרטים",
                     TransactionsTab: "תשלומים",
+                },
+            },
+            Connections: {
+                inputFields: {
+                    person_id: { name: "קוד איש", type: "None" },
+                    first_name: { name: "שם פרטי", type: "text" },
+                    last_name: { name: "שם משפחה", type: "text" },
+                    nickname: { name: "כינוי", type: "text" },
+                    type_connection: { name: "קשר לדירה", type: "None" },
+                    phone: { name: "טלפון", type: "tel" },
+                    second_phone: { name: "טלפון שני", type: "tel" },
+                    entered: { name: "נכנס", type: "date" },
+                    exited: { name: "יצא", type: "date" },
                 },
             },
             Payments: {},

@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // import Icon's
-import chevronUp from "../../../Icons/chevron-up.svg";
-import chevronDown from "../../../Icons/chevron-down.svg";
+import DownChevronIcon from "../../../Icons/DownChevronIcon.js";
+import UpChevronIcon from "../../../Icons/UpChevronIcon.js";
+import AddNewIcon from "../../../Icons/AddNewIcon.js";
+import SaveIcon from "../../../Icons/SaveIcon.js";
+import ResetIcon from "../../../Icons/ResetIcon.js";
+import ExcelIcon from "../../../Icons/ExcelIcon.js";
 
 //Import Styles
 import "./NewInputBox.css";
@@ -120,13 +124,23 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
             }>
             <div className="new-input-box-title" onClick={handleCollapse}>
                 <div className="new-input-title">
+                    <AddNewIcon fillColor="black" height="20px" width="20px" />
                     {translateOpenNew[pageName]}
                 </div>
                 <div className="box-collapse" onClick={handleCollapse}>
-                    <img
-                        src={inputBoxOpen ? chevronUp : chevronDown}
-                        alt="change-visibility"
-                    />
+                    {inputBoxOpen ? (
+                        <UpChevronIcon
+                            fillColor="#ff7b1d"
+                            height="30px"
+                            width="30px"
+                        />
+                    ) : (
+                        <DownChevronIcon
+                            fillColor="#ff7b1d"
+                            height="30px"
+                            width="30px"
+                        />
+                    )}
                 </div>
             </div>
             {inputBoxOpen && (
@@ -141,17 +155,32 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
                             <div
                                 className="new-input-box-button"
                                 onClick={handleSaveButton}>
+                                <SaveIcon
+                                    fillColor="black"
+                                    height="14"
+                                    width="14"
+                                />
                                 שמור
                             </div>
                             <div
                                 className="new-input-box-button"
                                 onClick={resetInputFields}>
+                                <ResetIcon
+                                    fillColor="black"
+                                    height="14"
+                                    width="14"
+                                />
                                 ניקוי
                             </div>
                         </div>
                         <div
                             className="new-input-box-button excel-upload"
                             onClick={handleExcelButton}>
+                            <ExcelIcon
+                                fillColor="black"
+                                height="20px"
+                                width="20px"
+                            />
                             להעלות אקסל
                         </div>
                     </div>

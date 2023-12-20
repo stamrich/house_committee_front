@@ -2,9 +2,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 
 // Importing all tabs
+import ApartmentsTab from "./ApartmentsTab/ApartmentsTab.js";
+import ConnectionsTab from "./ConnectionsTab/ConnectionsTab.js";
 import InputTab from "./InputTab/InputTab.js";
 import TransactionsTab from "./TransactionsTab/TransactionsTab.js";
-import ApartmentsTab from "./ApartmentsTab/ApartmentsTab.js";
 
 // Importing components
 // import MyAgTable from "../MyAgTable/MyAgTable.js";
@@ -54,26 +55,28 @@ function PopUpWindow() {
                 return <TransactionsTab />;
             case "ApartmentsTab":
                 return <ApartmentsTab />;
+            case "ConnectionsTab":
+                return <ConnectionsTab />;
             default:
                 break;
         }
     };
 
     return (
-        <div className="PopUp-wrapper">
-            <div className="PopUp">
-                <div className="PopUp-header">
-                    <div className="PopUp-header-title">
+        <div className="PopUpWindow-wrapper">
+            <div className="PopUpWindow">
+                <div className="PopUpWindow-header">
+                    <div className="PopUpWindow-header-title">
                         קוד {translateWindowName[pageName]} : {id}
                     </div>
-                    <div className="PopUp-tab-selectors">
+                    <div className="PopUpWindow-tab-selectors">
                         {Object.keys(allTabs).map((tabName) => {
                             return (
                                 <div
                                     className={
                                         tabName === shownTab
-                                            ? "PopUp-tab selected"
-                                            : "PopUp-tab"
+                                            ? "PopUpWindow-tab selected"
+                                            : "PopUpWindow-tab"
                                     }
                                     id={tabName}
                                     key={`tab-${tabName}`}
@@ -83,11 +86,13 @@ function PopUpWindow() {
                             );
                         })}
                     </div>
-                    <div className="PopUp-close" onClick={handleCloseButton}>
+                    <div
+                        className="PopUpWindow-close"
+                        onClick={handleCloseButton}>
                         <img src={xSymbol} alt="x symbol" />
                     </div>
                 </div>
-                <div className="PopUp-body">{showTab(shownTab)}</div>
+                <div className="PopUpWindow-body">{showTab(shownTab)}</div>
             </div>
         </div>
     );

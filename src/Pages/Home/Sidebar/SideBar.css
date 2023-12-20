@@ -3,7 +3,7 @@
     top: 0;
     right: 0;
     height: 100%;
-    width: 18vw;
+    width: 10vw;
     border-bottom-left-radius: 35px;
     border-top-left-radius: 35px;
     background-color: #fff;
@@ -12,14 +12,37 @@
     flex-direction: column;
     z-index: 100;
 }
+.SideBar.collapsed {
+    width: 4vw;
+}
+.SideBar.collapsed .collapse-button {
+    margin-right: 3vw;
+}
+.SideBar .collapse-button {
+    margin-top: 23vh;
+    margin-right: 9vw;
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    background-color: white;
+    /* background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SideBar .side-bar-links {
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
 .SideBar .side-bar-link-box:first-child {
-    margin-top: 25vh;
+    margin-top: 2vh;
 }
 .SideBar .side-bar-link-box {
     margin-left: 10px;
     padding: 8px 14px 8px 14px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     text-decoration: none;
     color: black;
@@ -31,4 +54,7 @@
     color: #fff;
     background-color: #ff7b1d;
     background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
+}
+.SideBar .side-bar-link-logo {
+    padding-left: 20px;
 }

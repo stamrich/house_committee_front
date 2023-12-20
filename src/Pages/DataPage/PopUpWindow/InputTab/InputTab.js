@@ -5,6 +5,13 @@ import { useParams } from "react-router-dom";
 import { PageContext } from "../../../../Context/PageContext.js";
 import { useAuth } from "../../../../hooks/auth/auth.js";
 
+//Confirm Save Component
+import SavePopUp from "../../SavePopUp/SavePopUp.js";
+
+//Icons
+import SaveIcon from "../../../../Icons/SaveIcon.js";
+import ResetIcon from "../../../../Icons/ResetIcon.js";
+
 function InputTab() {
     const { axiosApi } = useAuth();
     const { pageInfo } = useContext(PageContext);
@@ -12,6 +19,7 @@ function InputTab() {
     const inputFields = pageInfo[pageName].inputFields;
     const [oldInputValues, setOldInputValues] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
+    const [confirmSave, setConfirmSave] = useState(false);
     const [inputValues, setInputValues] = useState(
         Object.fromEntries(Object.keys(inputFields).map((x) => [x, ""]))
     );
@@ -28,7 +36,7 @@ function InputTab() {
                     ])
                 );
                 // this is here to remove the id from the inputValues
-                delete existingData.id;
+                // delete existingData.id;
                 setOldInputValues(existingData);
                 setInputValues(existingData);
             } catch (error) {
@@ -38,6 +46,63 @@ function InputTab() {
         fetchSingleData();
         // eslint-disable-next-line
     }, [tabName]);
+
+    function inputTypes(inputName) {
+        switch (inputFields[inputName].type) {
+            case "text":
+            case "number":
+            case "tel":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}:{" "}
+                        <input
+                            type={inputFields[inputName].type}
+                            name={inputName}
+                            value={inputValues[inputName]}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                );
+            case "textArea":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}:{" "}
+                        <textarea
+                            name={inputName}
+                            value={inputValues[inputName]}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                );
+            case "select":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}:{" "}
+                        <select
+                            name={inputName}
+                            value={inputValues[inputName]}
+                            onChange={handleInputChange}>
+                            <option hidden label=" "></option>
+                            {inputFields[inputName].options.map((option) => {
+                                return (
+                                    <option value={option} key={option}>
+                                        {option}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </div>
+                );
+            case "None":
+                return (
+                    <div key={inputName}>
+                        {inputFields[inputName].name}: {inputValues[inputName]}
+                    </div>
+                );
+            default:
+                break;
+        }
+    }
 
     const handleInputChange = (event) => {
         console.log(event);
@@ -50,6 +115,11 @@ function InputTab() {
         setInputValues(oldInputValues);
     };
 
+    const handleConfirmSave = async () => {
+        setConfirmSave(false);
+        handleSave();
+    };
+
     const handleSave = async () => {
         setResponseMessage("");
         console.log("updated values");
@@ -59,7 +129,7 @@ function InputTab() {
                 const res = await axiosApi.put(`/${pageName}/${id}`, {
                     inputValues,
                 });
-                console.log(res);
+                // console.log(res);
                 if (res.request.status === 200) {
                     setResponseMessage("השינויים נשמרו בהצלחה");
                     setOldInputValues(inputValues);
@@ -69,27 +139,38 @@ function InputTab() {
             }
         }
     };
+
     return (
-        <div className="PopUp-info-tab">
+        <div className="PopUpWindow-info-tab">
+            {confirmSave && (
+                <SavePopUp
+                    handleSave={handleConfirmSave}
+                    handleClose={() => {
+                        setConfirmSave(false);
+                    }}
+                    bodyText={{
+                        inputValues: inputValues,
+                        oldInputValues: oldInputValues,
+                    }}
+                />
+            )}
             <div className="response-message">{responseMessage}</div>
-            <div className="PopUp-info-tab-inputs">
-                {Object.keys(inputFields).map((inputKey) => (
-                    <div key={`inputs-${inputKey}`}>
-                        {inputFields[inputKey].name}:{" "}
-                        <input
-                            type={inputFields[inputKey].type}
-                            name={inputKey}
-                            value={inputValues[inputKey]}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                ))}
+            <div className="PopUpWindow-info-tab-inputs">
+                {Object.keys(inputFields).map((inputName) =>
+                    inputTypes(inputName)
+                )}
             </div>
-            <div className="PopUp-info-tab-buttons">
-                <div className="PopUp-info-tab-button" onClick={handleSave}>
+            <div className="PopUpWindow-info-tab-buttons">
+                <div
+                    className="PopUpWindow-info-tab-button"
+                    onClick={() => setConfirmSave(true)}>
+                    <SaveIcon fillColor="black" height="14" width="14" />
                     שמור
                 </div>
-                <div className="PopUp-info-tab-button" onClick={resetInputs}>
+                <div
+                    className="PopUpWindow-info-tab-button"
+                    onClick={resetInputs}>
+                    <ResetIcon fillColor="black" height="14" width="14" />
                     ניקוי
                 </div>
             </div>

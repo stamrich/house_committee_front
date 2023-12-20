@@ -1,20 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Varela+Round&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-family: "Varela Round", sans-serif;
 }
 .App {
     height: 100vh;
-    width: 99vw;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     cursor: default;
     background-color: #f5f5f5e4;
+    overflow: hidden;
 }
 .content-wrapper {
     padding-top: 13vh;
-    padding-right: 19vw;
+    padding-right: 12vw;
+    padding-left: 1vw;
     display: flex;
     height: 100vh;
-    width: 99vw;
+    width: 100vw;
+    overflow: auto;
+}
+/*For costume scrollbar does not work yet*/
+.content-wrapper::-webkit-scrollbar {
+    height: 16px;
+    width: 10px;
+}
+/* .content-wrapper::-webkit-scrollbar-corner {
+    height: 0;
+    width: 0;
+    display: none;
+} */
+.content-wrapper::-webkit-scrollbar-thumb {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    background-color: "green";
+    border-radius: 50px;
+}
+.content-wrapper::-webkit-scrollbar-track {
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    color: "red";
+    border-radius: 50px;
 }

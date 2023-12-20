@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../hooks/auth/auth.js";
 import { useCookies } from "react-cookie";
 
@@ -10,11 +10,12 @@ import "./Header.css";
 import { PageContext } from "../../../Context/PageContext.js";
 
 function Header() {
+    const url = useLocation().pathname;
     const cookies = useCookies()[0];
     const { logout } = useAuth();
     const hebrewNames = useContext(PageContext);
     const pageNames = hebrewNames.pageNames;
-    const { pageName } = useParams();
+    const pageName = url.split("/")[1];
 
     return (
         <div className="Header">

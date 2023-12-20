@@ -1,20 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-// Import Components
+// // Import Components
 import MyAgTable from "../../MyAgTable/MyAgTable.js";
 
-//Import Context
+// //Import Context
 import { PageContext } from "../../../../Context/PageContext";
 import { useAuth } from "../../../../hooks/auth/auth.js";
 
-function ApartmentsTab() {
+function ConnectionsTab() {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
     const { axiosApi } = useAuth();
     const [rowData, setRowData] = useState();
     const navigator = useNavigate();
     const { id } = useParams();
     const hebrewNames = useContext(PageContext);
-    const inputFields = hebrewNames.pageInfo["Apartments"].inputFields;
+    const inputFields = hebrewNames.pageInfo["Connections"].inputFields;
     // eslint-disable-next-line
     const [columnData, setColumnData] = useState(
         Object.keys(inputFields).map((key) => {
@@ -24,6 +25,14 @@ function ApartmentsTab() {
                     ? inputFields[key].name
                     : inputFields[key],
                 filter: true,
+                cellRenderer: (params) => {
+                    if (dateRegex.test(params.value)) {
+                        console.log("works with date");
+                        const date = new Date(params.value);
+                        return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+                    }
+                    return params.value;
+                },
                 cellStyle: (params) => {
                     if (params.value < 0) {
                         return {
@@ -39,8 +48,11 @@ function ApartmentsTab() {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axiosApi.get(`/apartments/byBuilding/${id}`);
-                console.log(res);
+                const res = await axiosApi.get(`/people/byConnection/${id}`);
+                // console.log(res);
+                console.log(dateRegex.test(res.data[0].entered));
+                console.log(new Date(res.data[0].entered));
+                console.log(new Date("null"));
                 setRowData(res.data);
             } catch (error) {
                 console.log(error);
@@ -51,7 +63,7 @@ function ApartmentsTab() {
     }, [id]);
 
     const handleDoubleClick = (row) => {
-        navigator(`/Apartments/${row.data.id}`);
+        navigator(`/People/${row.data.person_id}`);
     };
 
     return (
@@ -70,4 +82,9 @@ function ApartmentsTab() {
     );
 }
 
-export default ApartmentsTab;
+export default ConnectionsTab;
+
+// function ApartmentsTab() {
+// }
+
+// export default ApartmentsTab;

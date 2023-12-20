@@ -19,10 +19,10 @@ function DataPage() {
     const hebrewNames = useContext(PageContext);
     const [selectedId, setSelectedId] = useState(false);
     const [rowData, setRowData] = useState();
-    const [columnData, setColumnData] = useState();
     const [newDataEntered, setNewDataEntered] = useState(false);
     const inputFields = hebrewNames.pageInfo[pageName].inputFields;
     const { axiosApi } = useAuth();
+    const [columnData, setColumnData] = useState();
 
     // useEffect(() => {TODO: trying handle 404
     // const possiblePages = Object.keys(hebrewNames.pageNames);
@@ -34,32 +34,33 @@ function DataPage() {
     // }, []);
 
     useEffect(() => {
-        setColumnData();
+        setColumnData(
+            Object.keys(inputFields).map((key) => {
+                return {
+                    field: key,
+                    headerName: inputFields[key]
+                        ? inputFields[key].name
+                        : inputFields[key],
+                    filter: true,
+                    cellStyle: (params) => {
+                        if (params.value < 0) {
+                            return {
+                                color: "red",
+                            };
+                        }
+                        return null;
+                    },
+                };
+            })
+        );
         setRowData();
+        // eslint-disable-next-line
     }, [pageName]);
 
     useEffect(() => {
         const fetchAllData = async () => {
             try {
                 const res = await axiosApi.get(`/${pageName}/info`);
-                const columns = Object.keys(res.data[0]).map((key) => {
-                    return {
-                        field: key,
-                        headerName: inputFields[key]
-                            ? inputFields[key].name
-                            : inputFields[key],
-                        filter: true,
-                        cellStyle: (params) => {
-                            if (params.value < 0) {
-                                return {
-                                    color: "red",
-                                };
-                            }
-                            return null;
-                        },
-                    };
-                });
-                setColumnData(columns);
                 setRowData(res.data);
             } catch (error) {
                 console.log(error);
@@ -98,7 +99,7 @@ function DataPage() {
             <MyAgTable
                 allData={rowData}
                 columnNames={columnData}
-                size={{ width: "100%", height: "60vh" }}
+                size={{ width: "100%", height: "67vh" }}
                 handleDoubleClick={handleDoubleClick}
             />
             <Outlet />

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/auth/auth.js";
 
+import PersonIcon from "../../Icons/PersonIcon.js";
+import KeyIcon from "../../Icons/KeyIcon.js";
+
 import "./Login.css";
 
 function Login() {
@@ -8,40 +11,6 @@ function Login() {
     const [password, setPassword] = useState("");
     const [response, setResponse] = useState("");
     const { login } = useAuth();
-
-    // //not relevant for here but still useful
-    // const logout = () => {
-    //     setUser(null);
-    //     cookies.remove("jwt_authorization");
-    // };
-
-    // // const login = (jwt_token) => {
-    // //     const decode = jwtDecode(jwt_token);
-
-    // //     cookies.set("jwt_authorization", jwt_token, {
-    // //         expires: new Date(decode.exp * 1000),
-    // //     });
-    // // };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const res = await axios.post("/login", {
-    //             username,
-    //             password,
-    //         });
-    //         login(res.data.accessToken);
-    //         console.log(res);
-    //         setUser(res.data);
-    //         console.log(user);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // };
-    // useEffect(() => {
-    //     console.log("trying to return home");
-    //     navigator("/");
-    // }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,11 +23,27 @@ function Login() {
         <div className="Login">
             <form onSubmit={handleSubmit}>
                 <span className="formTitle">ועד בית</span>
+                <div>
+                    <PersonIcon
+                        fillColor={"gray"}
+                        height={"24px"}
+                        width={"24px"}
+                    />{" "}
+                    שם משתמש:
+                </div>
                 <input
                     type="text"
-                    placeholder="מייל"
+                    placeholder="שם משתמש"
                     onChange={(e) => setUsername(e.target.value)}
                 />
+                <div>
+                    <KeyIcon
+                        fillColor={"gray"}
+                        height={"40px"}
+                        width={"40px"}
+                    />
+                    סיסמה:
+                </div>
                 <input
                     type="password"
                     placeholder="סיסמה"
