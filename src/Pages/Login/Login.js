@@ -21,39 +21,46 @@ function Login() {
 
     return (
         <div className="Login">
-            <form onSubmit={handleSubmit}>
-                <span className="formTitle">ועד בית</span>
-                <div>
-                    <PersonIcon
-                        fillColor={"gray"}
-                        height={"24px"}
-                        width={"24px"}
-                    />{" "}
-                    שם משתמש:
-                </div>
-                <input
-                    type="text"
-                    placeholder="שם משתמש"
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <div>
-                    <KeyIcon
-                        fillColor={"gray"}
-                        height={"40px"}
-                        width={"40px"}
+            <div class="my-login-box">
+                <div className="square" style={{ "--i": 0 }}></div>
+                <div className="square" style={{ "--i": 1 }}></div>
+                <div className="square" style={{ "--i": 2 }}></div>
+                <div className="square" style={{ "--i": 3 }}></div>
+                <div className="square" style={{ "--i": 4 }}></div>
+                <form onSubmit={handleSubmit}>
+                    <span className="form-title">ועד הבית המרכזי</span>
+                    <div className="input-label">
+                        <PersonIcon
+                            fillColor={"black"}
+                            height={"24px"}
+                            width={"40px"}
+                        />{" "}
+                        שם משתמש:
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="שם משתמש"
+                        onChange={(e) => setUsername(e.target.value)}
                     />
-                    סיסמה:
-                </div>
-                <input
-                    type="password"
-                    placeholder="סיסמה"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="response-message">{response}</div>
-                <button type="submit" className="submitButton">
-                    כניסה
-                </button>
-            </form>
+                    <div className="input-label">
+                        <KeyIcon
+                            fillColor={"black"}
+                            height={"35px"}
+                            width={"40px"}
+                        />
+                        סיסמה:
+                    </div>
+                    <input
+                        type="password"
+                        placeholder="סיסמה"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className="response-message">{response}</div>
+                    <button type="submit" className="submitButton">
+                        כניסה
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

@@ -11,19 +11,18 @@
     align-items: center;
 }
 .PopUpWindow {
-    overflow: auto;
     width: 80vw;
     height: 80vh;
-    padding: 20px 40px;
+    padding: 4vh 40px;
     border-radius: 35px;
     background-color: #fff;
-    box-shadow: 0 25px 35px #0000002e;
-    overflow: hidden; /*                  NEED TO CHANGE              */
+    overflow: hidden;
 }
 .PopUpWindow-header {
+    height: 10vh;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    padding-bottom: 6vh;
 }
 .PopUpWindow-header-title {
     font-size: larger;
@@ -36,14 +35,13 @@
     margin: 0 10px;
     padding: 5px 10px;
     border-radius: 35px;
-    border: 1px solid #ffb886;
+    border: 1px solid var(--secondary-color);
 }
 .PopUpWindow-tab:hover {
-    background-color: #ffb886;
+    background-color: var(--secondary-color);
 }
 .PopUpWindow-tab.selected {
-    background-color: #ffb886;
-    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
+    background-color: var(--main-color);
     color: #fff;
 }
 .PopUpWindow-close:hover {
@@ -52,77 +50,8 @@
 }
 .PopUpWindow-body {
     /* padding-top: 30px; */
-    height: 70%;
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: center; */
-    align-items: safe;
-    overflow: hidden; /*                  NEED TO CHANGE              */
-}
-.PopUpWindow-info-tab {
-    flex-wrap: wrap;
-    display: flex;
-    align-items: last baseline;
-}
-.PopUpWindow-info-tab-inputs {
-    flex-wrap: wrap;
-    display: flex;
-    align-items: baseline;
-}
-.PopUpWindow-info-tab div {
-    margin: 5px;
-}
-.PopUpWindow-info-tab-buttons {
-    display: flex;
-}
-.PopUpWindow-info-tab-button {
-    margin: 0 10px;
-    padding: 5px 10px;
-    border-radius: 35px;
-    border: 1px solid #ffb886;
+    height: 62vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 30px;
-}
-.PopUpWindow-info-tab-button:hover {
-    background-color: #ffb886;
-}
-.PopUpWindow-transaction-container {
-    display: flex;
-    height: 100%;
-}
-.PopUpWindow-transaction-options {
-    height: 70vh;
-    width: 20vw;
-    border-bottom-left-radius: 35px;
-    border-top-left-radius: 35px;
-    background-color: #fff;
-    box-shadow: 0 25px 35px #0000002e;
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
-    margin-left: 20px;
-}
-.PopUpWindow-transaction-option:first-child {
-    margin-top: 3vh;
-}
-.PopUpWindow-transaction-option {
-    /* height: 300px;
-    width: 200px; */
-    margin-left: 10px;
-    padding: 8px 14px 8px 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.PopUpWindow-transaction-option:last-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #ff7b1d;
-    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
 }

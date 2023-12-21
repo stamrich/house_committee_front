@@ -64,7 +64,7 @@ function PopUpWindow() {
 
     return (
         <div className="PopUpWindow-wrapper">
-            <div className="PopUpWindow">
+            <div className="PopUpWindow box-shadow">
                 <div className="PopUpWindow-header">
                     <div className="PopUpWindow-header-title">
                         קוד {translateWindowName[pageName]} : {id}

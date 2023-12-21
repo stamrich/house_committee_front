@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import { PageContext } from "../../../../Context/PageContext.js";
 import { useAuth } from "../../../../hooks/auth/auth.js";
 
+//Style
+import "./InputTab.css";
+
 //Confirm Save Component
 import SavePopUp from "../../SavePopUp/SavePopUp.js";
 
@@ -53,7 +56,7 @@ function InputTab() {
             case "number":
             case "tel":
                 return (
-                    <div key={inputName}>
+                    <div key={inputName} className="input-box">
                         {inputFields[inputName].name}:{" "}
                         <input
                             type={inputFields[inputName].type}
@@ -65,7 +68,7 @@ function InputTab() {
                 );
             case "textArea":
                 return (
-                    <div key={inputName}>
+                    <div key={inputName} className="input-box">
                         {inputFields[inputName].name}:{" "}
                         <textarea
                             name={inputName}
@@ -76,7 +79,7 @@ function InputTab() {
                 );
             case "select":
                 return (
-                    <div key={inputName}>
+                    <div key={inputName} className="input-box">
                         {inputFields[inputName].name}:{" "}
                         <select
                             name={inputName}
@@ -95,7 +98,7 @@ function InputTab() {
                 );
             case "None":
                 return (
-                    <div key={inputName}>
+                    <div key={inputName} className="input-box">
                         {inputFields[inputName].name}: {inputValues[inputName]}
                     </div>
                 );
@@ -141,7 +144,7 @@ function InputTab() {
     };
 
     return (
-        <div className="PopUpWindow-info-tab">
+        <div className="InputTab">
             {confirmSave && (
                 <SavePopUp
                     handleSave={handleConfirmSave}
@@ -155,22 +158,22 @@ function InputTab() {
                 />
             )}
             <div className="response-message">{responseMessage}</div>
-            <div className="PopUpWindow-info-tab-inputs">
+            <div className="InputTab-inputs">
                 {Object.keys(inputFields).map((inputName) =>
                     inputTypes(inputName)
                 )}
             </div>
-            <div className="PopUpWindow-info-tab-buttons">
-                <div
-                    className="PopUpWindow-info-tab-button"
-                    onClick={() => setConfirmSave(true)}>
-                    <SaveIcon fillColor="black" height="14" width="14" />
+            <div className="InputTab-buttons">
+                <div className="button" onClick={() => setConfirmSave(true)}>
+                    <SaveIcon fillColor="currentColor" height="14" width="14" />
                     שמור
                 </div>
-                <div
-                    className="PopUpWindow-info-tab-button"
-                    onClick={resetInputs}>
-                    <ResetIcon fillColor="black" height="14" width="14" />
+                <div className="button" onClick={resetInputs}>
+                    <ResetIcon
+                        fillColor="currentColor"
+                        height="14"
+                        width="14"
+                    />
                     ניקוי
                 </div>
             </div>

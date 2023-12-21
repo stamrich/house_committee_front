@@ -152,21 +152,17 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
                     </div>
                     <div className="new-input-box-buttons-container">
                         <div className="new-input-box-buttons">
-                            <div
-                                className="new-input-box-button"
-                                onClick={handleSaveButton}>
+                            <div className="button" onClick={handleSaveButton}>
                                 <SaveIcon
-                                    fillColor="black"
+                                    fillColor="currentColor"
                                     height="14"
                                     width="14"
                                 />
                                 שמור
                             </div>
-                            <div
-                                className="new-input-box-button"
-                                onClick={resetInputFields}>
+                            <div className="button" onClick={resetInputFields}>
                                 <ResetIcon
-                                    fillColor="black"
+                                    fillColor="currentColor"
                                     height="14"
                                     width="14"
                                 />
@@ -174,10 +170,10 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
                             </div>
                         </div>
                         <div
-                            className="new-input-box-button excel-upload"
+                            className="excel-upload button"
                             onClick={handleExcelButton}>
                             <ExcelIcon
-                                fillColor="black"
+                                fillColor="currentColor"
                                 height="20px"
                                 width="20px"
                             />

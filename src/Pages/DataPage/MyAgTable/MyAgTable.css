@@ -7,7 +7,7 @@
 }
 .ag-theme-balham {
     /* --ag-header-foreground-color: rgb(204, 245, 172); */
-    --ag-header-background-color: #ffb886;
+    --ag-header-background-color: var(--secondary-color);
     --ag-odd-row-background-color: rgb(0, 0, 0, 0.1);
     --ag-cell-horizontal-padding: 20px;
     --ag-cell-vertical-padding: 0px;

@@ -3,7 +3,7 @@
     top: 0;
     right: 0;
     height: 100%;
-    width: 10vw;
+    width: var(--sidebar-width);
     border-bottom-left-radius: 35px;
     border-top-left-radius: 35px;
     background-color: #fff;
@@ -20,7 +20,7 @@
 }
 .SideBar .collapse-button {
     margin-top: 23vh;
-    margin-right: 9vw;
+    margin-right: calc(var(--sidebar-width) - 1vw);
     width: 25px;
     height: 25px;
     border-radius: 50px;
@@ -52,8 +52,8 @@
     border-bottom-left-radius: 50px;
     font-weight: bold;
     color: #fff;
-    background-color: #ff7b1d;
-    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
+    background-color: var(--main-color);
+    background-image: var(--main-background);
 }
 .SideBar .side-bar-link-logo {
     padding-left: 20px;

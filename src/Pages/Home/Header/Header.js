@@ -9,6 +9,9 @@ import "./Header.css";
 //Context
 import { PageContext } from "../../../Context/PageContext.js";
 
+//Components
+import DropdownSelect from "../../Components/DropdownSelect.js";
+
 function Header() {
     const url = useLocation().pathname;
     const cookies = useCookies()[0];
@@ -20,17 +23,20 @@ function Header() {
     return (
         <div className="Header">
             <div className="top-header-bar">
-                <div className="top-header-bar-title">ועד בית</div>
+                <div className="top-header-bar-title">ועד הבית המרכזי</div>
                 <div className="top-header-bar-username">
                     שלום, {cookies.name}
                 </div>
                 <div
-                    className="top-header-bar-logout submitButton"
+                    className="top-header-bar-logout button"
                     onClick={() => logout()}>
                     יציאה
                 </div>
             </div>
-            <div className="top-body-bar">{pageNames[pageName]}</div>
+            <div className="top-body-bar">
+                <div className="top-body-bar-title">{pageNames[pageName]}</div>
+                <DropdownSelect inputName="test" />
+            </div>
         </div>
     );
 }
