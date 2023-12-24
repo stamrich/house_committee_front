@@ -11,18 +11,21 @@ import "./DataPage.css";
 //Import Context
 import { PageContext } from "../../Context/PageContext";
 import { useAuth } from "../../hooks/auth/auth.js";
+import { UsersInfoContext } from "../../Context/UsersInfoContext.js";
 
 function DataPage() {
     const location = useLocation();
     const { pageName } = useParams();
     const navigator = useNavigate();
     const hebrewNames = useContext(PageContext);
+    const allUsersInfo = useContext(UsersInfoContext);
     const [selectedId, setSelectedId] = useState(false);
     const [rowData, setRowData] = useState();
     const [newDataEntered, setNewDataEntered] = useState(false);
-    const inputFields = hebrewNames.pageInfo[pageName].inputFields;
-    const { axiosApi } = useAuth();
     const [columnData, setColumnData] = useState();
+    const { axiosApi } = useAuth();
+    const inputFields = hebrewNames.pageInfo[pageName].inputFields;
+    const currentBuilding = allUsersInfo.updateCurrentBuilding.currentBuilding;
 
     // useEffect(() => {TODO: trying handle 404
     // const possiblePages = Object.keys(hebrewNames.pageNames);
@@ -60,16 +63,21 @@ function DataPage() {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axiosApi.get(`/${pageName}/info`);
+                let httpRequest = "";
+                if (currentBuilding.id === 0 || pageName === "Buildings") {
+                    httpRequest = `/${pageName}/info`;
+                } else {
+                    httpRequest = `/${pageName}/byBuilding/${currentBuilding.id}`;
+                }
+                const res = await axiosApi.get(httpRequest);
                 setRowData(res.data);
             } catch (error) {
                 console.log(error);
             }
         };
         fetchAllData();
-        setSelectedId(false);
-        console.log(pageName); // eslint-disable-next-line
-    }, [location, newDataEntered]);
+        setSelectedId(false); // eslint-disable-next-line
+    }, [location, newDataEntered, currentBuilding]);
 
     useEffect(() => {
         if (selectedId) {
@@ -82,8 +90,6 @@ function DataPage() {
     };
 
     const saveNewInput = async (values) => {
-        console.log("all the values");
-        console.log(values);
         try {
             const res = await axiosApi.post(`/${pageName}/new`, { values });
             console.log(res);

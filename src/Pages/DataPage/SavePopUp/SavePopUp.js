@@ -1,6 +1,7 @@
 // import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+//Style
 import "./SavePopUp.css";
 
 // import Icon's
@@ -8,28 +9,34 @@ import xSymbol from "../../../Icons/x-symbol.svg";
 import SaveIcon from "../../../Icons/SaveIcon.js";
 
 function SavePopUp({ handleSave, handleClose, bodyText }) {
-    const { inputValues, oldInputValues } = bodyText;
+    const { inputValues, oldInputValues, inputFields } = bodyText;
     const [changes, setChanges] = useState(["1", "2"]);
 
     useEffect(() => {
         setChanges([
-            Object.keys(inputValues).map((inputName) =>
-                inputValues[inputName] !== oldInputValues[inputName]
-                    ? `${inputName} מ: ${inputValues[inputName]} ל: ${oldInputValues[inputName]}`
-                    : ""
-            ),
+            Object.keys(inputValues).map((inputName) => {
+                if (
+                    oldInputValues &&
+                    inputValues[inputName] !== oldInputValues[inputName]
+                ) {
+                    return `ב${inputFields[inputName].name} מ: ${oldInputValues[inputName]} ל: ${inputValues[inputName]}`;
+                } else if (
+                    oldInputValues === undefined &&
+                    inputValues[inputName] !== ""
+                ) {
+                    return `ב${inputFields[inputName].name} לעדכן: ${inputValues[inputName]}`;
+                }
+                return "";
+            }),
         ]); // eslint-disable-next-line
     }, []);
-
-    console.log(bodyText);
-    console.log(oldInputValues);
 
     return (
         <div className="SavePopUp-wrapper">
             <div className="SavePopUp">
                 <div className="SavePopUp-header">
                     <div className="SavePopUp-header-title">
-                        אתה רוצה לשמור את השינויים?
+                        אתה רוצה לשמור את השינויים האלו?
                     </div>
                     <div className="SavePopUp-close" onClick={handleClose}>
                         <img src={xSymbol} alt="x symbol" />
@@ -49,8 +56,8 @@ function SavePopUp({ handleSave, handleClose, bodyText }) {
                         return "";
                     })}
                 </div>
-                <div className="SavePopUp-save-button">
-                    <SaveIcon fillColor="black" height="14" width="14" />
+                <div className="button" onClick={handleSave}>
+                    <SaveIcon fillColor="currentColor" height="14" width="14" />
                     שמור
                 </div>
             </div>

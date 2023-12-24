@@ -40,22 +40,16 @@
     height: 70%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     /* justify-content: center; */
     align-items: safe;
     overflow: hidden; /*                  NEED TO CHANGE              */
 }
 
-.SavePopUp-save-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 30px;
-    margin: 0 10px;
-    padding: 5px 10px;
-    border-radius: 35px;
-    border: 1px solid #ffb886;
+.SavePopUp-body div {
+    padding: 0 10px;
 }
-.SavePopUp-save-button:hover {
-    background-color: #ffb886;
+
+.SavePopUp .button {
+    width: 80px;
 }

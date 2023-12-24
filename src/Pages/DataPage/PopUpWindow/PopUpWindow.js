@@ -39,7 +39,6 @@ function PopUpWindow() {
     };
 
     function changeTab(event) {
-        console.log(event.target.id);
         setShownTab(event.target.id);
     } // eslint-disable-next-line
 

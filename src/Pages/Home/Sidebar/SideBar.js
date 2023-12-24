@@ -99,7 +99,12 @@ function SideBar() {
 
     return (
         <>
-            <div className={collapsed ? "SideBar collapsed" : "SideBar"}>
+            <div
+                className={
+                    collapsed
+                        ? "SideBar box-shadow collapsed"
+                        : "SideBar box-shadow"
+                }>
                 <div
                     className={
                         collapsed

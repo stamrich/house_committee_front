@@ -5,8 +5,6 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* background-color: #f5f5f5e4; */
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,9 +19,7 @@
     align-items: center;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    /* background-color: #fff; */
     border-radius: 35px;
-    box-shadow: 0 25px 35px #0000002e;
 }
 
 .Login .form-title {
@@ -44,24 +40,27 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-.Login .submitButton {
-    width: 100px;
-    padding: 10px;
-    border: 1px solid #ff7b1d;
-    border-radius: 35px;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    color: black;
-    text-align: center;
+.Login .password-input-box {
+    display: flex;
+    align-items: center;
+    margin-right: -10px;
 }
 
-.Login .submitButton:hover {
-    background-color: #ffb886;
-    background-image: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
-    color: #fff;
+.Login .eye-icon {
+    padding-top: 5px;
+    margin-right: -30px;
+    cursor: pointer;
+}
+
+.Login .button {
+    width: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.Login .button:hover {
+    background-image: var(--main-background);
     transform: scale(1.1);
-    transition-duration: 150ms;
 }
 
 .Login .response-message {
@@ -72,6 +71,7 @@
 .Login .my-login-box {
     position: relative;
 }
+
 .Login .my-login-box .square {
     position: absolute;
     backdrop-filter: blur(5px);
@@ -81,7 +81,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    animation: animate 10s linear infinite;
+    animation: animate 13s linear infinite;
     animation-delay: calc(-1s * var(--i));
 }
 @keyframes animate {
@@ -98,10 +98,6 @@
     right: -60px;
     width: 100px;
     height: 100px;
-    /* background-image: url(pic/108.png); */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 .Login .my-login-box .square:nth-child(2) {
     top: 150px;
@@ -109,10 +105,6 @@
     width: 120px;
     height: 120px;
     z-index: 2;
-    /* background-image: url(pic/118.png); */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 .Login .my-login-box .square:nth-child(3) {
     bottom: 50px;
@@ -120,18 +112,10 @@
     width: 80px;
     height: 80px;
     z-index: 2;
-    /* background-image: url(pic/117.png); */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 .Login .my-login-box .square:nth-child(4) {
     bottom: -80px;
     left: 100px;
     width: 50px;
     height: 50px;
-    /* background-image: url(pic/101.png); */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
 }

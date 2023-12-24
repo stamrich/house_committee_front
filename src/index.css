@@ -1,5 +1,6 @@
 html {
     --sidebar-width: 10vw;
+    --header-height: 13vh;
     --main-color: #ff7b1d;
     --secondary-color: #ffb886;
     --main-background: linear-gradient(90deg, #ff920b 0, #f35c17 90%);
@@ -34,12 +35,13 @@ input:focus {
     border: 1px solid var(--main-background);
     color: black;
     margin: 0 10px;
+    border: 1px solid #ff7b1d;
 }
 
 .button:hover {
     background-color: var(--main-color);
     color: #fff;
-    transition-duration: 150ms;
+    transition: 150ms ease;
 }
 
 .box-shadow {

@@ -38,8 +38,6 @@ function InputTab() {
                         res.data[0][x] === null ? "" : `${res.data[0][x]}`,
                     ])
                 );
-                // this is here to remove the id from the inputValues
-                // delete existingData.id;
                 setOldInputValues(existingData);
                 setInputValues(existingData);
             } catch (error) {
@@ -108,7 +106,6 @@ function InputTab() {
     }
 
     const handleInputChange = (event) => {
-        console.log(event);
         const name = event.target.name;
         const value = event.target.value;
         setInputValues((values) => ({ ...values, [name]: value }));
@@ -118,6 +115,12 @@ function InputTab() {
         setInputValues(oldInputValues);
     };
 
+    const openConformSave = () => {
+        if (oldInputValues !== inputValues) {
+            setConfirmSave(true);
+        }
+    };
+
     const handleConfirmSave = async () => {
         setConfirmSave(false);
         handleSave();
@@ -125,14 +128,11 @@ function InputTab() {
 
     const handleSave = async () => {
         setResponseMessage("");
-        console.log("updated values");
-        console.log(oldInputValues === inputValues);
         if (oldInputValues !== inputValues) {
             try {
                 const res = await axiosApi.put(`/${pageName}/${id}`, {
                     inputValues,
                 });
-                // console.log(res);
                 if (res.request.status === 200) {
                     setResponseMessage("השינויים נשמרו בהצלחה");
                     setOldInputValues(inputValues);
@@ -154,6 +154,7 @@ function InputTab() {
                     bodyText={{
                         inputValues: inputValues,
                         oldInputValues: oldInputValues,
+                        inputFields: inputFields,
                     }}
                 />
             )}
@@ -164,7 +165,7 @@ function InputTab() {
                 )}
             </div>
             <div className="InputTab-buttons">
-                <div className="button" onClick={() => setConfirmSave(true)}>
+                <div className="button" onClick={openConformSave}>
                     <SaveIcon fillColor="currentColor" height="14" width="14" />
                     שמור
                 </div>

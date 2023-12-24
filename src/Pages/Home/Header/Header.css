@@ -1,7 +1,7 @@
 .Header {
     position: fixed;
     top: 0;
-    height: 13vh;
+    height: var(--header-height);
     width: 100vw;
     color: #fff;
     background-image: var(--main-background);
@@ -9,7 +9,7 @@
 }
 .Header .top-header-bar {
     padding: 20px;
-    height: 7vh;
+    height: calc(var(--header-height) - 6vh);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -27,12 +27,11 @@
 .Header .top-header-bar-logout {
     width: 10%;
     right: 0;
-    /* margin: 20px; */
 }
 .Header .top-body-bar {
     padding-right: calc(var(--sidebar-width) + 10px);
     color: black;
-    height: 6vh;
+    height: calc(var(--header-height) - 7vh);
     width: 100%;
     display: flex;
     justify-content: space-between;

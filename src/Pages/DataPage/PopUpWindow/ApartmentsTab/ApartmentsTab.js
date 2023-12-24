@@ -4,6 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 // Import Components
 import MyAgTable from "../../MyAgTable/MyAgTable.js";
 
+//Style
+import "./ApartmentsTab.css";
+
 //Import Context
 import { PageContext } from "../../../../Context/PageContext";
 import { useAuth } from "../../../../hooks/auth/auth.js";
@@ -55,10 +58,10 @@ function ApartmentsTab() {
     };
 
     return (
-        <div className="PopUpWindow-transaction-container">
-            <div className="PopUpWindow-transaction-options">
-                <div className="PopUpWindow-transaction-option">הוסף חדש</div>
-                <div className="PopUpWindow-transaction-option">מחק</div>
+        <div className="ApartmentsTab-transaction-container">
+            <div className="ApartmentsTab-transaction-options">
+                <div className="ApartmentsTab-transaction-option">הוסף חדש</div>
+                <div className="ApartmentsTab-transaction-option">מחק</div>
             </div>
             <MyAgTable
                 allData={rowData}

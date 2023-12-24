@@ -8,6 +8,7 @@ import "./Header.css";
 
 //Context
 import { PageContext } from "../../../Context/PageContext.js";
+import { UsersInfoContext } from "../../../Context/UsersInfoContext.js";
 
 //Components
 import DropdownSelect from "../../Components/DropdownSelect.js";
@@ -17,6 +18,7 @@ function Header() {
     const cookies = useCookies()[0];
     const { logout } = useAuth();
     const hebrewNames = useContext(PageContext);
+    const allUsersInfo = useContext(UsersInfoContext);
     const pageNames = hebrewNames.pageNames;
     const pageName = url.split("/")[1];
 
@@ -35,7 +37,15 @@ function Header() {
             </div>
             <div className="top-body-bar">
                 <div className="top-body-bar-title">{pageNames[pageName]}</div>
-                <DropdownSelect inputName="test" />
+                <DropdownSelect
+                    allOptions={allUsersInfo["allBuildings"]}
+                    setSelectedOption={
+                        allUsersInfo["updateCurrentBuilding"].setCurrentBuilding
+                    }
+                    selectedOption={
+                        allUsersInfo["updateCurrentBuilding"].currentBuilding
+                    }
+                />
             </div>
         </div>
     );

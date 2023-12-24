@@ -17,17 +17,3 @@
 .InputTab-buttons {
     display: flex;
 }
-.InputTab-button {
-    margin: 0 10px;
-    padding: 5px 10px;
-    border-radius: 35px;
-    border: 1px solid #ffb886;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 30px;
-}
-.InputTab-button:hover {
-    background-color: #ffb886;
-}

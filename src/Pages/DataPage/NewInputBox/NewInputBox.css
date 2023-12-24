@@ -6,7 +6,6 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 5px 5px #0000002e;
     border-radius: 5px;
 }
 .new-input-box .new-input-box-title {

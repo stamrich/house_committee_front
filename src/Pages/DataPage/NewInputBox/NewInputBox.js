@@ -12,11 +12,15 @@ import ExcelIcon from "../../../Icons/ExcelIcon.js";
 //Import Styles
 import "./NewInputBox.css";
 
+//Components
+import SavePopUp from "../SavePopUp/SavePopUp.js";
+
 function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     // const { pageName } = useParams();
     const { pageName } = useParams();
     const inputFields = inputNames;
     const [inputBoxOpen, setInputBoxOpen] = useState(false);
+    const [confirmSave, setConfirmSave] = useState(false);
     const [inputValues, setInputValues] = useState(
         Object.fromEntries(Object.keys(inputFields).map((x) => [x, ""]))
     );
@@ -52,17 +56,21 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     };
 
     function handleSaveButton() {
-        console.log(inputValues);
-        //only if some info is inputted will it save :TODO: add validation here
         if (
             inputValues["zipcode"] ||
             inputValues["משפחה"] ||
-            inputValues["amount"]
+            inputValues["balance"]
         ) {
-            handleSave(inputValues);
-            resetInputFields();
+            setConfirmSave(true);
         }
+        //only if some info is inputted will it save :TODO: add validation here
     }
+
+    const handleConfirmSave = () => {
+        setConfirmSave(false);
+        handleSave(inputValues);
+        resetInputFields();
+    };
 
     function inputTypes(inputName) {
         switch (inputFields[inputName].type) {
@@ -120,8 +128,22 @@ function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     return (
         <div
             className={
-                inputBoxOpen ? "new-input-box box-open" : "new-input-box"
+                inputBoxOpen
+                    ? "new-input-box box-shadow box-open"
+                    : "new-input-box box-shadow"
             }>
+            {confirmSave && (
+                <SavePopUp
+                    handleSave={handleConfirmSave}
+                    handleClose={() => {
+                        setConfirmSave(false);
+                    }}
+                    bodyText={{
+                        inputValues: inputValues,
+                        inputFields: inputFields,
+                    }}
+                />
+            )}
             <div className="new-input-box-title" onClick={handleCollapse}>
                 <div className="new-input-title">
                     <AddNewIcon fillColor="black" height="20px" width="20px" />

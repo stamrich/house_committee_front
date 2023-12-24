@@ -8,6 +8,7 @@ import DataPage from "../DataPage/DataPage";
 import Header from "./Header/Header";
 import SideBar from "./Sidebar/SideBar";
 import PageContextProvider from "../../Context/PageContext";
+import UsersInfoContextProvider from "../../Context/UsersInfoContext";
 import PopUpWindow from "../DataPage/PopUpWindow/PopUpWindow";
 
 function Home() {
@@ -57,11 +58,13 @@ function Home() {
 
     return (
         <PageContextProvider>
-            <Header />
-            <div className="content-wrapper">
-                <SideBar />
-                {routes}
-            </div>
+            <UsersInfoContextProvider>
+                <Header />
+                <div className="content-wrapper">
+                    <SideBar />
+                    {routes}
+                </div>
+            </UsersInfoContextProvider>
         </PageContextProvider>
     );
 }

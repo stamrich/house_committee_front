@@ -1,0 +1,23 @@
+.DropdownSelect {
+    position: relative;
+    margin-left: 20px;
+    width: 250px;
+}
+
+.Dropdown-selected {
+    padding-left: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.Dropdown-menu {
+    position: absolute;
+    /* transform: translateY(4px); */
+    width: 100%;
+    background-color: white;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+}
