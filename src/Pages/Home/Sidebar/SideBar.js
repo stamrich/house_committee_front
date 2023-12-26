@@ -95,23 +95,16 @@ function SideBar() {
 
     function handleCollapse() {
         setCollapsed((current) => !current);
+        document.documentElement.style.setProperty(
+            "--sidebar-width",
+            collapsed ? "10vw" : "4vw"
+        );
     }
 
     return (
         <>
-            <div
-                className={
-                    collapsed
-                        ? "SideBar box-shadow collapsed"
-                        : "SideBar box-shadow"
-                }>
-                <div
-                    className={
-                        collapsed
-                            ? "collapse-button collapsed"
-                            : "collapse-button"
-                    }
-                    onClick={handleCollapse}>
+            <div className={"SideBar box-shadow"}>
+                <div className={"collapse-button"} onClick={handleCollapse}>
                     {collapsed ? (
                         <LeftChevronIcon
                             fillColor="#ff7b1d"

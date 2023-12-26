@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 // // Import Components
-import MyAgTable from "../../MyAgTable/MyAgTable.js";
+import MyAgTable from "../../Components/MyAgTable/MyAgTable.js";
 
 // //Import Context
-import { PageContext } from "../../../../Context/PageContext";
-import { useAuth } from "../../../../hooks/auth/auth.js";
+import { PageContext } from "../../../Context/PageContext.js";
+import { useAuth } from "../../../hooks/auth/auth.js";
 
 function ConnectionsTab() {
     const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;

@@ -15,10 +15,11 @@ function PageContextProvider({ children }) {
         },
         pageInfo: {
             Apartments: {
+                addNew: "דירה חדשה",
                 inputFields: {
                     id: { name: "קוד", type: "None" },
                     address: { name: "כתובת", type: "None" },
-                    balance: { name: "עובר ושב", type: "number" },
+                    balance: { name: "קופה", type: "number" },
                     tenant: { name: "דייר", type: "None" },
                     boss: { name: "בעל הבית", type: "None" },
                     buildings_id: { name: "קוד בניין", type: "text" },
@@ -36,15 +37,16 @@ function PageContextProvider({ children }) {
                 },
             },
             Buildings: {
+                addNew: "בניין חדש",
                 inputFields: {
                     id: { name: "קוד", type: "None" },
                     street: { name: "רחוב", type: "text" },
-                    street_number: { name: "בספר בית", type: "number" },
+                    street_number: { name: "מספר בניין", type: "number" },
                     city: { name: "עיר", type: "text" },
-                    balance: { name: "עובר ושב", type: "number" },
-                    representative: { name: "נציג", type: "text" },
+                    balance: { name: "קופה", type: "number" },
+                    representative: { name: "שם נציג", type: "text" },
                     representative_phone: { name: "טלפון נציג", type: "tel" },
-                    representative_email: { name: "אמייל נציג", type: "text" },
+                    representative_email: { name: "מייל נציג", type: "text" },
                     apartment_amount: { name: "סך הכול דירות", type: "None" },
                     remarks: { name: "הערות", type: "textArea" },
                 },
@@ -55,18 +57,19 @@ function PageContextProvider({ children }) {
                 },
             },
             People: {
+                addNew: "איש קשר חדש",
                 inputFields: {
                     id: { name: "קוד", type: "None" },
                     first_name: { name: "שם פרטי", type: "text" },
                     last_name: { name: "שם משפחה", type: "text" },
                     nickname: { name: "כינוי", type: "text" },
-                    balance: { name: "עובר ושב", type: "number" },
+                    balance: { name: "קופה", type: "number" },
                     city: { name: "עיר", type: "None" },
                     address: { name: "כתובת", type: "None" },
                     type_connection: { name: "קשר לדירה", type: "None" },
                     phone: { name: "טלפון", type: "tel" },
                     second_phone: { name: "טלפון שני", type: "tel" },
-                    email: { name: "אמייל", type: "text" },
+                    email: { name: "מייל", type: "text" },
                     id_number: { name: "ת.ז.", type: "text" },
                     remarks: { name: "הערות", type: "textArea" },
                     partner_id_number: { name: "ת.ז. שוטף", type: "text" },
@@ -78,7 +81,7 @@ function PageContextProvider({ children }) {
                         name: "טלפון שני שוטף",
                         type: "tel",
                     },
-                    partner_email: { name: "אמייל שוטף", type: "text" },
+                    partner_email: { name: "מייל שוטף", type: "text" },
                     partner_remarks: { name: "הערות שוטף", type: "text" },
                 },
                 Tabs: {
@@ -87,6 +90,7 @@ function PageContextProvider({ children }) {
                 },
             },
             Todos: {
+                addNew: "משימה חדשה",
                 inputFields: {
                     connection_id: { name: "קוד שייכות", type: "text" },
                     connection_id_type: { name: "סוגה שייכות", type: "text" },
@@ -100,6 +104,7 @@ function PageContextProvider({ children }) {
                 },
             },
             Transactions: {
+                addNew: "תשלום חדש",
                 inputFields: {
                     connection_id: { name: "קוד שייכות", type: "text" },
                     connection_id_type: {

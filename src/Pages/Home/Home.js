@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 
 //Pages
 import Settings from "../Settings/Settings";
+import Dashboard from "../Dashboard/Dashboard";
 import DataPage from "../DataPage/DataPage";
 
 //Components
@@ -9,7 +10,7 @@ import Header from "./Header/Header";
 import SideBar from "./Sidebar/SideBar";
 import PageContextProvider from "../../Context/PageContext";
 import UsersInfoContextProvider from "../../Context/UsersInfoContext";
-import PopUpWindow from "../DataPage/PopUpWindow/PopUpWindow";
+import PopUpWindow from "../PopUpWindow/PopUpWindow";
 
 function Home() {
     const routes = useRoutes([
@@ -19,7 +20,7 @@ function Home() {
         },
         {
             path: "Dashboard",
-            element: <Settings />,
+            element: <Dashboard />,
         },
         {
             path: "Settings",
@@ -34,23 +35,6 @@ function Home() {
                 {
                     path: ":id/*",
                     element: <PopUpWindow />,
-                    // children: [
-                    //     {
-                    //         index: true,
-                    //         path: "InputTab",
-                    //         element: <InputTab />,
-                    //     },
-                    //     {
-                    //         index: false,
-                    //         path: "TransactionsTab",
-                    //         element: <TransactionsTab />,
-                    //     },
-                    //     {
-                    //         index: false,
-                    //         path: "ApartmentsTab",
-                    //         element: <ApartmentsTab />,
-                    //     },
-                    // ],
                 },
             ],
         },

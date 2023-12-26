@@ -13,7 +13,7 @@ import ExcelIcon from "../../../Icons/ExcelIcon.js";
 import "./NewInputBox.css";
 
 //Components
-import SavePopUp from "../SavePopUp/SavePopUp.js";
+import SavePopUp from "../../SavePopUp/SavePopUp.js";
 
 function NewInputBox({ inputNames, handleSave, handleExcelButton }) {
     // const { pageName } = useParams();

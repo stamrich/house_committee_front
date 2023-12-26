@@ -19,6 +19,15 @@ export const UserProvider = ({ children }) => {
         },
     });
 
+    // const axiosApiDownload = axios.create({
+    //     baseURL: "http://localhost:5000/api/",
+    //     headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //         authorization: cookies.refreshToken,
+    //     },
+    // });
+
     axiosApi.interceptors.response.use(
         function (response) {
             return response;
@@ -41,8 +50,6 @@ export const UserProvider = ({ children }) => {
                 username: username,
                 password: password,
             });
-            console.log("res:");
-            console.log(res);
             setCookies("accessToken", res.data.accessToken); // your token
             setCookies("refreshToken", res.data.accessToken); // your token
             setCookies("name", res.data.fullName);

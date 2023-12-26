@@ -7,17 +7,14 @@ import ConnectionsTab from "./ConnectionsTab/ConnectionsTab.js";
 import InputTab from "./InputTab/InputTab.js";
 import TransactionsTab from "./TransactionsTab/TransactionsTab.js";
 
-// Importing components
-// import MyAgTable from "../MyAgTable/MyAgTable.js";
-
 //Import Styles
 import "./PopUpWindow.css";
 
 // import Icon's
-import xSymbol from "../../../Icons/x-symbol.svg";
+import xSymbol from "../../Icons/x-symbol.svg";
 
 //Context
-import { PageContext } from "../../../Context/PageContext.js";
+import { PageContext } from "../../Context/PageContext.js";
 
 function PopUpWindow() {
     const { pageInfo } = useContext(PageContext);
@@ -40,7 +37,7 @@ function PopUpWindow() {
 
     function changeTab(event) {
         setShownTab(event.target.id);
-    } // eslint-disable-next-line
+    }
 
     function handleCloseButton() {
         navigator("..");
@@ -66,24 +63,31 @@ function PopUpWindow() {
             <div className="PopUpWindow box-shadow">
                 <div className="PopUpWindow-header">
                     <div className="PopUpWindow-header-title">
-                        קוד {translateWindowName[pageName]} : {id}
+                        {id === "new" ? (
+                            pageInfo[pageName].addNew
+                        ) : (
+                            <>
+                                קוד {translateWindowName[pageName]} : {id}
+                            </>
+                        )}
                     </div>
                     <div className="PopUpWindow-tab-selectors">
-                        {Object.keys(allTabs).map((tabName) => {
-                            return (
-                                <div
-                                    className={
-                                        tabName === shownTab
-                                            ? "PopUpWindow-tab selected"
-                                            : "PopUpWindow-tab"
-                                    }
-                                    id={tabName}
-                                    key={`tab-${tabName}`}
-                                    onClick={changeTab}>
-                                    {allTabs[tabName]}
-                                </div>
-                            );
-                        })}
+                        {id !== "new" &&
+                            Object.keys(allTabs).map((tabName) => {
+                                return (
+                                    <div
+                                        className={
+                                            tabName === shownTab
+                                                ? "PopUpWindow-tab selected"
+                                                : "PopUpWindow-tab"
+                                        }
+                                        id={tabName}
+                                        key={`tab-${tabName}`}
+                                        onClick={changeTab}>
+                                        {allTabs[tabName]}
+                                    </div>
+                                );
+                            })}
                     </div>
                     <div
                         className="PopUpWindow-close"

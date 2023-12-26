@@ -2,8 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 //Context
-import { PageContext } from "../../../../Context/PageContext.js";
-import { useAuth } from "../../../../hooks/auth/auth.js";
+import { PageContext } from "../../../Context/PageContext.js";
+import { useAuth } from "../../../hooks/auth/auth.js";
 
 //Style
 import "./InputTab.css";
@@ -12,8 +12,9 @@ import "./InputTab.css";
 import SavePopUp from "../../SavePopUp/SavePopUp.js";
 
 //Icons
-import SaveIcon from "../../../../Icons/SaveIcon.js";
-import ResetIcon from "../../../../Icons/ResetIcon.js";
+import SaveIcon from "../../../Icons/SaveIcon.js";
+import ResetIcon from "../../../Icons/ResetIcon.js";
+import ExcelIcon from "../../../Icons/ExcelIcon.js";
 
 function InputTab() {
     const { axiosApi } = useAuth();
@@ -28,23 +29,33 @@ function InputTab() {
     );
 
     useEffect(() => {
-        const fetchSingleData = async () => {
-            try {
-                const res = await axiosApi.get(`/${pageName}/${id}`);
-                // this to filter out all the nulls, if not done it raises an error
-                const existingData = Object.fromEntries(
-                    Object.keys(res.data[0]).map((x) => [
-                        x,
-                        res.data[0][x] === null ? "" : `${res.data[0][x]}`,
-                    ])
-                );
-                setOldInputValues(existingData);
-                setInputValues(existingData);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchSingleData();
+        if (id !== "new") {
+            const fetchSingleData = async () => {
+                try {
+                    const res = await axiosApi.get(`/${pageName}/${id}`);
+                    // this to filter out all the nulls, if not done it raises an error
+                    const existingData = Object.fromEntries(
+                        Object.keys(res.data[0]).map((x) => [
+                            x,
+                            res.data[0][x] === null ? "" : `${res.data[0][x]}`,
+                        ])
+                    );
+                    setOldInputValues(existingData);
+                    setInputValues(existingData);
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            fetchSingleData();
+        } else if (id !== "new") {
+            setInputValues(
+                Object.fromEntries(
+                    Object.keys(inputFields).map((x) =>
+                        inputFields[x].type !== "None" ? [x, ""] : ""
+                    )
+                )
+            );
+        }
         // eslint-disable-next-line
     }, [tabName]);
 
@@ -126,9 +137,13 @@ function InputTab() {
         handleSave();
     };
 
+    const handleExcelButton = () => {
+        console.log("excel button clicked");
+    };
+
     const handleSave = async () => {
         setResponseMessage("");
-        if (oldInputValues !== inputValues) {
+        if (id !== "new") {
             try {
                 const res = await axiosApi.put(`/${pageName}/${id}`, {
                     inputValues,
@@ -137,6 +152,15 @@ function InputTab() {
                     setResponseMessage("השינויים נשמרו בהצלחה");
                     setOldInputValues(inputValues);
                 }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            try {
+                const res = await axiosApi.post(`/${pageName}/new`, {
+                    inputValues,
+                });
+                console.log(res);
             } catch (error) {
                 console.log(error);
             }
@@ -165,18 +189,36 @@ function InputTab() {
                 )}
             </div>
             <div className="InputTab-buttons">
-                <div className="button" onClick={openConformSave}>
-                    <SaveIcon fillColor="currentColor" height="14" width="14" />
-                    שמור
+                <div className="InputTab-save-reset-buttons">
+                    <div className="button" onClick={openConformSave}>
+                        <SaveIcon
+                            fillColor="currentColor"
+                            height="14"
+                            width="14"
+                        />
+                        שמור
+                    </div>
+                    <div className="button" onClick={resetInputs}>
+                        <ResetIcon
+                            fillColor="currentColor"
+                            height="14"
+                            width="14"
+                        />
+                        ניקוי
+                    </div>
                 </div>
-                <div className="button" onClick={resetInputs}>
-                    <ResetIcon
-                        fillColor="currentColor"
-                        height="14"
-                        width="14"
-                    />
-                    ניקוי
-                </div>
+                {id === "new" && (
+                    <div
+                        className="excel-upload button"
+                        onClick={handleExcelButton}>
+                        <ExcelIcon
+                            fillColor="currentColor"
+                            height="20px"
+                            width="20px"
+                        />
+                        להעלות אקסל
+                    </div>
+                )}
             </div>
         </div>
     );

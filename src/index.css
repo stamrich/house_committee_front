@@ -20,16 +20,19 @@ input {
     border: none;
     border-bottom: 1px solid var(--secondary-color);
 }
+
 input:focus {
     outline: none;
 }
+
 .button {
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-radius: 35px;
     cursor: pointer;
-    min-width: 80px;
+    height: 33px;
+    width: 80px;
     padding: 5px;
     background-color: var(--secondary-color);
     border: 1px solid var(--main-background);

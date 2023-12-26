@@ -2,14 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 // Import Components
-import MyAgTable from "../../MyAgTable/MyAgTable.js";
+import MyAgTable from "../../Components/MyAgTable/MyAgTable.js";
 
 //Style
 import "./ApartmentsTab.css";
 
 //Import Context
-import { PageContext } from "../../../../Context/PageContext";
-import { useAuth } from "../../../../hooks/auth/auth.js";
+import { PageContext } from "../../../Context/PageContext.js";
+import { useAuth } from "../../../hooks/auth/auth.js";
 
 function ApartmentsTab() {
     const { axiosApi } = useAuth();

@@ -11,7 +11,7 @@ import { PageContext } from "../../../Context/PageContext.js";
 import { UsersInfoContext } from "../../../Context/UsersInfoContext.js";
 
 //Components
-import DropdownSelect from "../../Components/DropdownSelect.js";
+import DropdownSelect from "../../Components/DropdownSelect/DropdownSelect.js";
 
 function Header() {
     const url = useLocation().pathname;

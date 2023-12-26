@@ -11,12 +11,6 @@
     flex-direction: column;
     z-index: 100;
 }
-.SideBar.collapsed {
-    width: 4vw;
-}
-.SideBar.collapsed .collapse-button {
-    margin-right: 3vw;
-}
 .SideBar .collapse-button {
     margin-top: 23vh;
     margin-right: calc(var(--sidebar-width) - 1vw);

@@ -5,30 +5,28 @@ import { useState, useEffect } from "react";
 import "./SavePopUp.css";
 
 // import Icon's
-import xSymbol from "../../../Icons/x-symbol.svg";
-import SaveIcon from "../../../Icons/SaveIcon.js";
+import xSymbol from "../../Icons/x-symbol.svg";
+import SaveIcon from "../../Icons/SaveIcon.js";
+import { useParams } from "react-router-dom";
 
 function SavePopUp({ handleSave, handleClose, bodyText }) {
+    const { id } = useParams();
     const { inputValues, oldInputValues, inputFields } = bodyText;
     const [changes, setChanges] = useState(["1", "2"]);
 
     useEffect(() => {
-        setChanges([
+        setChanges(
+            // eslint-disable-next-line
             Object.keys(inputValues).map((inputName) => {
-                if (
-                    oldInputValues &&
+                if (id === "new") {
+                    return `${inputFields[inputName].name}: ${inputValues[inputName]}`;
+                } else if (
                     inputValues[inputName] !== oldInputValues[inputName]
                 ) {
-                    return `ב${inputFields[inputName].name} מ: ${oldInputValues[inputName]} ל: ${inputValues[inputName]}`;
-                } else if (
-                    oldInputValues === undefined &&
-                    inputValues[inputName] !== ""
-                ) {
-                    return `ב${inputFields[inputName].name} לעדכן: ${inputValues[inputName]}`;
+                    return `${inputFields[inputName].name} מ: ${oldInputValues[inputName]} ל: ${inputValues[inputName]}`;
                 }
-                return "";
-            }),
-        ]); // eslint-disable-next-line
+            })
+        ); // eslint-disable-next-line
     }, []);
 
     return (
@@ -36,7 +34,8 @@ function SavePopUp({ handleSave, handleClose, bodyText }) {
             <div className="SavePopUp">
                 <div className="SavePopUp-header">
                     <div className="SavePopUp-header-title">
-                        אתה רוצה לשמור את השינויים האלו?
+                        אתה רוצה לשמור את {id === "new" ? "נתונים" : "השינויים"}{" "}
+                        ?
                     </div>
                     <div className="SavePopUp-close" onClick={handleClose}>
                         <img src={xSymbol} alt="x symbol" />

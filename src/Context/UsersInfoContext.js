@@ -22,7 +22,6 @@ function UsersInfoContextProvider({ children }) {
                     ...res.data,
                     { id: 0, address: "כל הבניינים" },
                 ]);
-                console.log(allBuildings);
             } catch (error) {
                 console.log(error);
             }

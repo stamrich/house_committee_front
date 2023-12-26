@@ -15,5 +15,14 @@
     /* justify-content: center; */
 }
 .InputTab-buttons {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+}
+.InputTab-save-reset-buttons {
+    display: flex;
+    /* align-items: center; */
+}
+.InputTab .excel-upload {
+    width: 150px;
 }

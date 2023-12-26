@@ -17,8 +17,8 @@
     overflow: hidden;
 }
 .content-wrapper {
-    padding-top: 13vh;
-    padding-right: 12vw;
+    padding-top: calc(var(--header-height) + 1vh);
+    padding-right: calc(var(--sidebar-width) + 1vw);
     padding-left: 1vw;
     display: flex;
     height: 100vh;

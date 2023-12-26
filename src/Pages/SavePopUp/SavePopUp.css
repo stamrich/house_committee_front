@@ -4,8 +4,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 99vh;
-    width: 99vw;
+    height: 100vh;
+    width: 100vw;
     background-color: rgba(94, 115, 113, 0.262);
     z-index: 250;
     display: flex;
@@ -16,7 +16,7 @@
 .SavePopUp {
     overflow: auto;
     width: 40vw;
-    height: 40vh;
+    min-height: 40vh;
     padding: 20px 40px;
     border-radius: 35px;
     background-color: #fff;
@@ -39,7 +39,7 @@
     /* padding-top: 30px; */
     height: 70%;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: column;
     /* justify-content: center; */
     align-items: safe;
