@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 //Context
 import { PageContext } from "../../../Context/PageContext.js";
@@ -17,11 +17,12 @@ import ResetIcon from "../../../Icons/ResetIcon.js";
 import ExcelIcon from "../../../Icons/ExcelIcon.js";
 
 function InputTab() {
+    const navigator = useNavigate();
     const { axiosApi } = useAuth();
     const { pageInfo } = useContext(PageContext);
     const { pageName, id, tabName } = useParams();
     const inputFields = pageInfo[pageName].inputFields;
-    const [oldInputValues, setOldInputValues] = useState({});
+    const [oldInputValues, setOldInputValues] = useState(false);
     const [responseMessage, setResponseMessage] = useState("");
     const [confirmSave, setConfirmSave] = useState(false);
     const [inputValues, setInputValues] = useState(
@@ -32,7 +33,9 @@ function InputTab() {
         if (id !== "new") {
             const fetchSingleData = async () => {
                 try {
-                    const res = await axiosApi.get(`/${pageName}/${id}`);
+                    const res = await axiosApi.get(
+                        `/info?pagename=${pageName}&filter=${pageName}By${pageName}&filter_id=${id}`
+                    );
                     // this to filter out all the nulls, if not done it raises an error
                     const existingData = Object.fromEntries(
                         Object.keys(res.data[0]).map((x) => [
@@ -123,7 +126,13 @@ function InputTab() {
     };
 
     const resetInputs = () => {
-        setInputValues(oldInputValues);
+        if (id !== "new") {
+            setInputValues(oldInputValues);
+        } else {
+            setInputValues(
+                Object.fromEntries(Object.keys(inputFields).map((x) => [x, ""]))
+            );
+        }
     };
 
     const openConformSave = () => {
@@ -135,6 +144,9 @@ function InputTab() {
     const handleConfirmSave = async () => {
         setConfirmSave(false);
         handleSave();
+        if (id === "new") {
+            navigator("..");
+        }
     };
 
     const handleExcelButton = () => {
@@ -160,7 +172,10 @@ function InputTab() {
                 const res = await axiosApi.post(`/${pageName}/new`, {
                     inputValues,
                 });
-                console.log(res);
+                if (res.request.status === 200) {
+                    setResponseMessage("השינויים נשמרו בהצלחה");
+                    resetInputs();
+                }
             } catch (error) {
                 console.log(error);
             }

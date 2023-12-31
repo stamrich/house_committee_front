@@ -17,7 +17,7 @@ function UsersInfoContextProvider({ children }) {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axiosApi.get(`/Buildings/byUser`);
+                const res = await axiosApi.get(`/Buildings/usersBuildings`);
                 setAllBuildings([
                     ...res.data,
                     { id: 0, address: "כל הבניינים" },

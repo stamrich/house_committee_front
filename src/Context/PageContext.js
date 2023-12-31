@@ -94,9 +94,9 @@ function PageContextProvider({ children }) {
                 inputFields: {
                     connection_id: { name: "קוד שייכות", type: "text" },
                     connection_id_type: { name: "סוגה שייכות", type: "text" },
-                    body: { name: "גוף", type: "text" },
+                    body: { name: "משימה", type: "textArea" },
                     remarks: { name: "הערות", type: "textArea" },
-                    todo_status: { name: "מצוב", type: "text" },
+                    todo_status: { name: "מצב", type: "text" },
                 },
                 Tabs: {
                     InputTab: "פרטים",
@@ -106,6 +106,7 @@ function PageContextProvider({ children }) {
             Transactions: {
                 addNew: "תשלום חדש",
                 inputFields: {
+                    id: { name: "קוד", type: "None" },
                     connection_id: { name: "קוד שייכות", type: "text" },
                     connection_id_type: {
                         name: "סוגה שייכות",

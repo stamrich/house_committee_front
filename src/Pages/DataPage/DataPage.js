@@ -32,13 +32,6 @@ function DataPage() {
     const currentBuilding = allUsersInfo.updateCurrentBuilding.currentBuilding;
 
     // useEffect(() => {TODO: trying handle 404
-    // const possiblePages = Object.keys(hebrewNames.pageNames);
-    //     console.log(possiblePages);
-    //     console.log(!possiblePages.includes(pageName));
-    //     if (!possiblePages.includes(pageName)) {
-    //         navigator("/Dashboard");
-    //     }
-    // }, []);
 
     useEffect(() => {
         setColumnData(
@@ -69,9 +62,9 @@ function DataPage() {
             try {
                 let httpRequest = "";
                 if (currentBuilding.id === 0 || pageName === "Buildings") {
-                    httpRequest = `/${pageName}/info`;
+                    httpRequest = `/info?pagename=${pageName}`;
                 } else {
-                    httpRequest = `/${pageName}/byBuilding/${currentBuilding.id}`;
+                    httpRequest = `/info?pagename=${pageName}&filter=${pageName}ByBuildings&filter_id=${currentBuilding.id}`;
                 }
                 const res = await axiosApi.get(httpRequest);
                 setRowData(res.data);
@@ -89,56 +82,25 @@ function DataPage() {
         } // eslint-disable-next-line
     }, [selectedId]);
 
-    // useEffect(() => {
-    //     if (downloadExcel !== 0) {
-    //         const downloadingExcel = async () => {
-    //             try {
-    //                 let httpRequest = "";
-    //                 if (currentBuilding.id === 0 || pageName === "Buildings") {
-    //                     httpRequest = `/${pageName}/info/excel`;
-    //                 } else {
-    //                     httpRequest = `/${pageName}/byBuilding/${currentBuilding.id}/excel`;
-    //                 }
-    //                 const res = axiosApi.get(httpRequest, {
-    //                     responseType: "blob",
-    //                 });
-    //                 console.log("trying to download excel");
-
-    //                 const url = window.URL.createObjectURL(
-    //                     new Blob([res.data])
-    //                 );
-
-    //                 // Create a temporary anchor element to initiate the download
-    //                 const link = document.createElement("a");
-    //                 link.href = url;
-    //                 link.setAttribute("download", "file.txt"); // Set the file name
-    //                 document.body.appendChild(link);
-    //                 link.click();
-
-    //                 // Clean up the temporary URL and anchor element
-    //                 URL.revokeObjectURL(url);
-    //                 document.body.removeChild(link);
-    //             } catch (error) {
-    //                 console.log(error);
-    //             }
-    //         };
-    //         downloadingExcel();
-    //     } // eslint-disable-next-line
-    // }, [downloadExcel]);
-
     const handleDownload = async () => {
         try {
-            const response = await axiosApi.get(`/${pageName}/info/excel`, {
+            let httpRequest = "";
+            if (currentBuilding.id === 0 || pageName === "Buildings") {
+                httpRequest = `/info?pagename=${pageName}&download=excel`;
+            } else {
+                httpRequest = `/info?pagename=${pageName}&filter=${pageName}ByBuildings&filter_id=${currentBuilding.id}&download=excel`;
+            }
+            const res = await axiosApi.get(httpRequest, {
                 responseType: "blob", // Set the response type to blob
             });
 
             //Gets the name of the file
-            const disposition = response.headers["content-disposition"];
+            const disposition = res.headers["content-disposition"];
             const match = disposition.match(/filename=(.*)"/);
             const fileName = match && match[1] ? match[1] : "downloaded_file";
 
             // Create a temporary URL for the file blob
-            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const url = window.URL.createObjectURL(new Blob([res.data]));
 
             // Create a temporary anchor element to initiate the download
             const link = document.createElement("a");
@@ -158,16 +120,6 @@ function DataPage() {
     const handleDoubleClick = (row) => {
         setSelectedId(row.data.id);
     };
-
-    // const saveNewInput = async (values) => {
-    //     try {
-    //         const res = await axiosApi.post(`/${pageName}/new`, { values });
-    //         console.log(res);
-    //         setNewDataEntered((old) => !old);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
 
     return (
         <div className="DataPage">

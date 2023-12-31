@@ -42,12 +42,12 @@ function SavePopUp({ handleSave, handleClose, bodyText }) {
                     </div>
                 </div>
                 <div className="SavePopUp-body">
-                    {changes.map((change) => {
+                    {changes.map((change, index) => {
                         if (change !== "") {
                             return (
                                 <div
                                     className="change-text"
-                                    key={`change-text-${change}`}>
+                                    key={`change-text-${index}`}>
                                     {change}
                                 </div>
                             );
