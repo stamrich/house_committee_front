@@ -17,10 +17,10 @@ function UsersInfoContextProvider({ children }) {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const res = await axiosApi.get(`/Buildings/usersBuildings`);
+                const res = await axiosApi.get(`/info/allBuildings`);
                 setAllBuildings([
-                    ...res.data,
                     { id: 0, address: "כל הבניינים" },
+                    ...res.data,
                 ]);
             } catch (error) {
                 console.log(error);

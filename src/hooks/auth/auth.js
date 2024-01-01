@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
     const [cookies, setCookies, removeCookie] = useCookies();
 
     const axiosApi = axios.create({
-        baseURL: "http://localhost:5000/api/",
+        baseURL: "/api/",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

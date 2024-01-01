@@ -1,0 +1,41 @@
+.pie-chart-container {
+    width: 200px;
+    height: 315px;
+    margin: 0 auto; /* Center the chart within the container */
+}
+
+.chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+    overflow: hidden;
+}
+
+/* ... rest of the CSS remains the same ... */
+
+.slice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 100% 100%, 100% 0);
+    transform-origin: 100% 100%;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+}
+
+.total {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
