@@ -18,7 +18,7 @@ function PageContextProvider({ children }) {
                 addNew: "דירה חדשה",
                 inputFields: {
                     id: { name: "קוד", type: "None" },
-                    address: { name: "כתובת", type: "None" },
+                    address: { name: "כתובת", type: "BuildingSelect" },
                     balance: { name: "קופה", type: "number" },
                     tenant: { name: "דייר", type: "None" },
                     boss: { name: "בעל הבית", type: "None" },

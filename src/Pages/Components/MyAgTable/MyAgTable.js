@@ -4,6 +4,7 @@ import { AgGridReact } from "ag-grid-react"; // the AG Grid React Component
 //Styles from Ag
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-balham.css"; // Optional theme CSS
+
 //My custom styles
 import "./MyAgTable.css";
 
@@ -16,9 +17,16 @@ function MyAgTable({ allData, columnNames, size, handleDoubleClick }) {
             sortable: true,
             resizable: true,
             width: 150,
+            enableValue: true,
+            localize: true,
+            // filterParams: { translate: true },
         }),
         []
     );
+
+    // const localeText = useMemo(() => {
+    //     return AG_GRID_LOCALE_HE;
+    // }, []);
 
     const gridOptions = {
         // Add event handlers - Added a double click event to get a popup
@@ -44,6 +52,7 @@ function MyAgTable({ allData, columnNames, size, handleDoubleClick }) {
             <div className="ag-theme-balham" style={size}>
                 <AgGridReact
                     enableRtl={true}
+                    // localeText={localeText}
                     ref={gridRef} // Ref for accessing Grid's API
                     rowData={allData} // Row Data for all the Rows
                     columnDefs={columnNames} // Column Defs for Columns

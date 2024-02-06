@@ -4,12 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 //Context
 import { PageContext } from "../../../Context/PageContext.js";
 import { useAuth } from "../../../hooks/auth/auth.js";
+import { UsersInfoContext } from "../../../Context/UsersInfoContext.js";
 
 //Style
 import "./InputTab.css";
 
 //Confirm Save Component
 import SavePopUp from "../../SavePopUp/SavePopUp.js";
+// import DropdownSelect from "../../DropdownSelect/DropdownSelect.js";
 
 //Icons
 import SaveIcon from "../../../Icons/SaveIcon.js";
@@ -20,6 +22,7 @@ function InputTab() {
     const navigator = useNavigate();
     const { axiosApi } = useAuth();
     const { pageInfo } = useContext(PageContext);
+    const allUsersInfo = useContext(UsersInfoContext);
     const { pageName, id, tabName } = useParams();
     const inputFields = pageInfo[pageName].inputFields;
     const [oldInputValues, setOldInputValues] = useState(false);
@@ -108,6 +111,16 @@ function InputTab() {
                         </select>
                     </div>
                 );
+            // case "BuildingsSelect":
+            //     return (
+            //         <div key={inputName} className="input-box">
+            //             <DropdownSelect
+            //                 allOptions={allUsersInfo["allBuildings"]}
+            //                 // setSelectedOption={ }
+            //                 selectedOption={"updateCurrentBuilding"}
+            //             />
+            //         </div>
+            //     );
             case "None":
                 return (
                     <div key={inputName} className="input-box">
