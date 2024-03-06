@@ -1,6 +1,6 @@
 // Example locale file for English, give this to your locale team to translate
 
-const AG_GRID_LOCALE_HE = {
+export default AG_GRID_LOCALE_HE = {
     // Set Filter
     selectAll: "(Select All)",
     selectAllSearchResults: "(Select All Search Results)",
@@ -59,7 +59,7 @@ const AG_GRID_LOCALE_HE = {
     // Advanced Filter
     advancedFilterContains: "contains",
     advancedFilterNotContains: "does not contain",
-    advancedFilterTextEquals: "equals",
+    advancedFilterTextEquals: "שווה",
     advancedFilterTextNotEqual: "does not equal",
     advancedFilterStartsWith: "begins with",
     advancedFilterEndsWith: "ends with",
@@ -136,9 +136,9 @@ const AG_GRID_LOCALE_HE = {
     rowDragRows: "rows",
 
     // Other
-    loadingOoo: "Loading...",
+    loadingOoo: "...מרענן",
     loadingError: "ERR",
-    noRowsToShow: "No Rows To Show",
+    noRowsToShow: "אין שורות להציג",
     enabled: "Enabled",
 
     // Menu
@@ -185,17 +185,17 @@ const AG_GRID_LOCALE_HE = {
     selectedRows: "Selected",
     totalRows: "Total Rows",
     totalAndFilteredRows: "Rows",
-    more: "More",
-    to: "to",
-    of: "of",
-    page: "Page",
+    more: "עוד",
+    to: "עד",
+    of: "מ",
+    page: "דף",
     pageLastRowUnknown: "?",
-    nextPage: "Next Page",
-    lastPage: "Last Page",
-    firstPage: "First Page",
-    previousPage: "Previous Page",
-    pageSizeSelectorLabel: "Page Size:",
-    footerTotal: "Total",
+    nextPage: "דף הבא",
+    lastPage: "דף אחרון",
+    firstPage: "דף ראשון",
+    previousPage: "דף הקודם",
+    pageSizeSelectorLabel: "גודל הדף:",
+    footerTotal: 'ס"ה',
 
     // Pivoting
     pivotColumnGroupTotals: "Total",

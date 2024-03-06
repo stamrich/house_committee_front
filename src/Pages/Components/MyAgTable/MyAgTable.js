@@ -24,9 +24,10 @@ function MyAgTable({ allData, columnNames, size, handleDoubleClick }) {
         []
     );
 
-    // const localeText = useMemo(() => {
-    //     return AG_GRID_LOCALE_HE;
-    // }, []);
+    const localeText = useMemo(() => {
+        // eslint-disable-next-line
+        return AG_GRID_LOCALE_HE;
+    }, []);
 
     const gridOptions = {
         // Add event handlers - Added a double click event to get a popup
@@ -52,7 +53,7 @@ function MyAgTable({ allData, columnNames, size, handleDoubleClick }) {
             <div className="ag-theme-balham" style={size}>
                 <AgGridReact
                     enableRtl={true}
-                    // localeText={localeText}
+                    localeText={localeText}
                     ref={gridRef} // Ref for accessing Grid's API
                     rowData={allData} // Row Data for all the Rows
                     columnDefs={columnNames} // Column Defs for Columns

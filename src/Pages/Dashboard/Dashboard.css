@@ -2,7 +2,7 @@
     width: 100%;
     border-radius: 35px;
     /* padding: 20px; */
-    overflow: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,11 +68,14 @@
     margin: 3px 0px;
     background-color: #f2eaeae4;
     border-radius: 20px;
-    animation: drop-in 1s;
+    animation: drop-in ease-in 1s;
 }
 @keyframes drop-in {
-    from {
+    0% {
         top: -100;
+    }
+    100% {
+        top: 0;
     }
 }
 .Dashboard-line:hover {

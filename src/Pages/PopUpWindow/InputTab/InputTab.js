@@ -11,7 +11,7 @@ import "./InputTab.css";
 
 //Confirm Save Component
 import SavePopUp from "../../SavePopUp/SavePopUp.js";
-// import DropdownSelect from "../../DropdownSelect/DropdownSelect.js";
+import DropdownSelect from "../../Components/DropdownSelect/DropdownSelect.js";
 
 //Icons
 import SaveIcon from "../../../Icons/SaveIcon.js";
@@ -111,16 +111,31 @@ function InputTab() {
                         </select>
                     </div>
                 );
-            // case "BuildingsSelect":
-            //     return (
-            //         <div key={inputName} className="input-box">
-            //             <DropdownSelect
-            //                 allOptions={allUsersInfo["allBuildings"]}
-            //                 // setSelectedOption={ }
-            //                 selectedOption={"updateCurrentBuilding"}
-            //             />
-            //         </div>
-            //     );
+            case "BuildingsSelect":
+                if (id !== "new") {
+                    return (
+                        <div key={inputName} className="input-box">
+                            <DropdownSelect
+                                allOptions={allUsersInfo["allBuildings"]}
+                                setSelectedOption={
+                                    allUsersInfo["updateCurrentBuilding"]
+                                        .setCurrentBuilding
+                                }
+                                selectedOption={
+                                    allUsersInfo["updateCurrentBuilding"]
+                                        .currentBuilding
+                                }
+                            />
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div key={inputName} className="input-box">
+                            {inputFields[inputName].name}:{" "}
+                            {inputValues[inputName]}
+                        </div>
+                    );
+                }
             case "None":
                 return (
                     <div key={inputName} className="input-box">
